@@ -1,0 +1,107 @@
+<%
+const handler = typeof room !== 'undefined' ? 'Durak' : 'DurakPlayback';
+%>
+<link rel="stylesheet" href="game/durak/style/durak.css">
+<script src="game/durak/vendor/durak.min.js"></script>
+
+<div class="durak play hidden" data-handler="<%- handler %>" data-deck="german">
+
+    <div class="opponents"></div>
+
+    <div class="table">
+        <div class="table-defense"></div>
+    </div>
+
+    <div class="stock">
+        <div class="trump-stamp" data-suit=""></div>
+        <div class="stock-pile"></div>
+    </div>
+
+    <div class="master player">
+        <div class="master-action">
+            <div class="master-action-icon">
+                <i class="icon-pass icon fas fa-check-circle" title="Pass" data-t="durak"></i>
+                <i class="icon-pick-up icon fa fa-arrow-alt-circle-down" title="Pick up" data-t="durak"></i>
+                <i class="icon-continue icon fas fa-check-circle" title="Continue" data-t="durak"></i>
+                <i class="icon-watching far fa-eye"></i>
+                <i class="icon-move far fa-hand-point-right" title="Move"></i>
+            </div>
+        </div>
+        <div class="playback-actions">
+            <div class="playback-action-play">
+                <i class="fas fa-play-circle"></i>
+            </div>
+            <div class="playback-action-pause">
+                <i class="fas fa-pause-circle"></i>
+            </div>
+            <div class="playback-action-start">
+                <i class="fas fa-fast-backward"></i>
+            </div>
+            <div class="playback-action-end">
+                <i class="fas fa-fast-forward"></i>
+            </div>
+        </div>
+        <div class="player-stats">
+            <div class="player-stat-won player-stat" title="Won" data-t="durak"></div>
+            <div class="player-stat-lost player-stat" title="Lost" data-t="durak"></div>
+            <div class="player-stat-drawn player-stat" title="Drawn" data-t="durak"></div>
+        </div>
+        <div class="player-attacker player-status" title="Attacker" data-t="durak"></div>
+        <div class="player-defender player-status" title="Defender" data-t="durak"></div>
+        <div class="player-winner player-end" title="Winner" data-t="durak">
+            <i class="fas fa-smile"></i>
+        </div>
+        <div class="player-loser player-end" title="Loser" data-t="durak">
+            <i class="fas fa-frown"></i>
+        </div>
+        <div class="player-draw player-end" title="Draw" data-t="durak">
+            <i class="far fa-meh"></i>
+        </div>
+        <div class="player-name"></div>
+    </div>
+
+    <div class="playback-text">Playback</div>
+
+    <div class="master-cards"></div>
+
+    <div class="discard"></div>
+
+    <div class="round-message" data-status="">
+        <div class="round-message-won" data-t="durak">Congratulations! You are a winner!</div>
+        <div class="round-message-out" data-t="durak">Not bad! Next time you win</div>
+        <div class="round-message-lost" data-t="durak">Alas, you have lost!</div>
+        <div class="round-message-drawn" data-t="durak">Wow! There is no loser!</div>
+    </div>
+
+    <div class="turn-status player-attacker player-status"></div>
+    <div class="turn-status player-defender player-status"></div>
+
+    <template data-id="opponent">
+        <div class="opponent-{{num}} player">
+            <div class="player-avatar">
+                <span class="bot fas fa-robot"></span>
+                <span class="remote fas fa-user"></span>
+            </div>
+            <div class="player-name"></div>
+            <div class="player-stats">
+                <div class="player-stat-won player-stat" title="Won" data-t="durak"></div>
+                <div class="player-stat-lost player-stat" title="Lost" data-t="durak"></div>
+                <div class="player-stat-drawn player-stat" title="Drawn" data-t="durak"></div>
+            </div>
+            <div class="player-message"></div>
+            <div class="player-attacker player-status" title="Attacker" data-t="durak"></div>
+            <div class="player-defender player-status" title="Defender" data-t="durak"></div>
+            <div class="player-winner player-end" title="Winner" data-t="durak">
+                <i class="fas fa-smile"></i>
+            </div>
+            <div class="player-loser player-end" title="Loser" data-t="durak">
+                <i class="fas fa-frown"></i>
+            </div>
+            <div class="player-draw player-end" title="Draw" data-t="durak">
+                <i class="far fa-meh"></i>
+            </div>
+            <div class="player-cards"></div>
+            <div class="player-card-counter" title="Cards in hand" data-t="durak"></div>
+        </div>
+    </template>
+</div>
