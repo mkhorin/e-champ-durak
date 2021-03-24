@@ -45,7 +45,7 @@ Club.Durak = class Durak extends Club.CardPlay {
     }
 
     createCountdown () {
-        return new Club.Countdown({
+        return new Club.CircularCountdown({
             refreshInterval: 200,
             $element: this.master.$action
         });
@@ -53,7 +53,7 @@ Club.Durak = class Durak extends Club.CardPlay {
 
     start (data) {
         super.start(...arguments);
-        this.masterPos = data.pos || 0;
+        this.master.pos = data.pos || 0;
         this.page.toggleLoading(true);
         this.events.clear();
         this.events.add(data.events);
@@ -61,11 +61,11 @@ Club.Durak = class Durak extends Club.CardPlay {
     }
 
     processEvents () {
-        this.events.hiddenIndex = this.resolveHiddenEventIndex();
+        this.events.hiddenIndex = this.resolveLastHiddenEventIndex();
         this.events.process();
     }
 
-    resolveHiddenEventIndex () {
+    resolveLastHiddenEventIndex () {
         const turn = this.events.getLastIndexByName(Club.DurakEvent.TURN);
         const index = turn + 1 === this.events.count()
             ? this.events.getFirstPreviousIndexByName(turn, Club.DurakEvent.DEAL)
@@ -91,8 +91,9 @@ Club.Durak = class Durak extends Club.CardPlay {
     }
 
     clear () {
+        super.clear();
+
         this.clearCards();
-        this.motion.clear();
         this.stock.clear();
         this.table.clear();
         this.discard.clear();
@@ -101,14 +102,14 @@ Club.Durak = class Durak extends Club.CardPlay {
     }
 
     startCountdown () {
-        const timeout = this.options?.actionTimeout;
-        this.countdown.start(timeout ? timeout * 1000 : 0, this.messageTimestamp);
+        const timeout = this.options?.actionTimeout * 1000;
+        this.countdown.start(timeout || 0, this.messageTimestamp);
     }
 
     startPlayers (items) {
         this.playerMap = {};
         for (let i = 0; i < items.length; ++i) {
-            const pos = (i + this.masterPos) % items.length;
+            const pos = (i + this.master.pos) % items.length;
             this.playerMap[pos] = this.players[i];
             this.players[i].start(pos, items[pos]);
         }
@@ -318,10 +319,14 @@ Club.Durak = class Durak extends Club.CardPlay {
         });
     }
 
+    hasExportData () {
+        return !this.isFinished();
+    }
+
     exportData () {
         return Object.assign(super.exportData(), {
             events: this.events.items,
-            pos: this.masterPos
+            pos: this.master.pos
         });
     }
 };

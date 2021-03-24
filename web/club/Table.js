@@ -105,7 +105,7 @@ Club.DurakTable = class DurakTable {
 
     getLastCard () {
         const pair = this.pairs[this.pairs.length - 1];
-        return pair ? pair[1] || pair[0] : null;
+        return pair ? (pair[1] || pair[0]) : null;
     }
 
     getAttackingCard (index) {

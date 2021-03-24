@@ -9,7 +9,7 @@ Jam.I18n.durak = {
     'Attacker': 'Атакующий',
 
     'Cards in hand': 'Карт в руке',
-    'Congratulations! You are a winner!': 'Подравляем! Вы победитель!',
+    'Congratulations! You are a winner!': 'Поздравляем! Вы победитель!',
     'Continue': 'Продолжить',
 
     'Deck': 'Колода',
@@ -40,7 +40,7 @@ Jam.I18n.durak = {
     'Transferable durak': 'Переводной дурак',
 
     'Winner': 'Победитель',
-    'Without trump': 'Без козырей',
+    'Without trump': 'Без козыря',
     'Won': 'Побед',
     'Wow! There is no loser!': 'Вот это да! Нет проигравшего!'
 };

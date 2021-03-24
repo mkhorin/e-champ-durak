@@ -18,10 +18,14 @@ module.exports = class Durak extends Base {
         this.stock = new Stock;
         this.table = new Table;
         this.discard = new Discard;
-        this.hands = this.room.players.map(player => new Hand(player));
+        this.hands = this.room.players.map(this.createHand, this);
         this.botHands = this.hands.filter(hand => hand.isBot());
         this.round = 0;
         this.startRound();
+    }
+
+    createHand (player) {
+        return new Hand(player);
     }
 
     startRound () {

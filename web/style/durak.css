@@ -1,16 +1,16 @@
 .durak{
-    --center-top: 240px;
-    --stock-width: 20%;
-    --master-cards-left: 80px;
-    --opponent-opacity: 0.5;
-    --active-opponent-opacity: 0.9;
+     --center-top: 240px;
+     --stock-width: 20%;
+     --master-cards-left: 80px;
+     --opponent-opacity: 0.5;
+     --active-opponent-opacity: 0.9;
 
-    position: relative;
-    height: 600px;
-    pointer-events: none;
-    overflow: hidden;
-    user-select: none;
-}
+     position: relative;
+     height: 600px;
+     pointer-events: none;
+     overflow: hidden;
+     user-select: none;
+ }
 .durak .player {
     position: relative;
 }
@@ -90,7 +90,7 @@
 }
 .durak .player[data-end="draw"] .player-stat-drawn {
     color: #fff;
-    background: #444;
+    background: #888;
 }
 
 .durak .player-status,
@@ -151,7 +151,7 @@
 
 .durak .player-card-counter {
     display: none;
-    position:absolute;
+    position: absolute;
     left: 8px;
     bottom: 10px;
     width: 20px;
@@ -330,7 +330,7 @@
 }
 .durak.master .master-action {
     --fill: #a0e0a0;
-    --empty: #ffb0b0;
+    --empty: #ffa0a0;
 }
 .durak .master .player-name {
     top: 125px;
@@ -519,7 +519,7 @@
     color: #555;
 }
 .durak .round-message-out {
-   color: #468;
+    color: #468;
 }
 .durak .round-message[data-status="out"] .round-message-out,
 .durak .round-message[data-status="winner"] .round-message-won,

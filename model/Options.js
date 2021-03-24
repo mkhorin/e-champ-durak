@@ -1,3 +1,6 @@
+/**
+ * @copyright Copyright (c)2021 Maxim Khorin <maksimovichu@gmail.com>
+ */
 'use strict';
 
 const Base = require('areto/base/Model');
@@ -66,15 +69,15 @@ module.exports = class Options extends Base {
                     'deck',
                     'maxAttacks',
                     'maxAttacksBeforeDiscard'
-                ], 'required'],
+                ],  'required'],
                 [[
                     'cardsDealtAtOnce',
                     'maxAttacks',
                     'maxAttacksBeforeDiscard'
-                ], 'integer', {min: 1, max: 18}],
+                ],  'integer', {min: 1, max: 18}],
                 [[
                     'deck'
-                ], 'range', {values: ['36', '52']}],
+                ],  'range', {values: ['36', '52']}],
                 [[
                     'attackLoser',
                     'fallenAce',
@@ -82,7 +85,7 @@ module.exports = class Options extends Base {
                     'stopAttackOnPickingUp',
                     'transferable',
                     'withoutTrump'
-                ], 'checkbox']
+                ],  'checkbox']
             ]
         };
     }

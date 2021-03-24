@@ -12,12 +12,14 @@ Club.DurakDealEvent = class DurakDealEvent extends Club.DurakEvent {
     }
 
     createDeals () {
-        return this.data.map(([pos, items]) => {
-            const total = Array.isArray(items) ? items.length : items;
-            const player = this.getPlayer(pos);
-            const opened = Array.isArray(items);
-            return {total, player, opened, items};
-        });
+        return this.data.map(this.createDeal, this);
+    }
+
+    createDeal ([pos, items]) {
+        const total = Array.isArray(items) ? items.length : items;
+        const player = this.getPlayer(pos);
+        const opened = Array.isArray(items);
+        return {total, player, opened, items};
     }
 
     processNormal () {
@@ -54,7 +56,8 @@ Club.DurakDealEvent = class DurakDealEvent extends Club.DurakEvent {
     }
 
     afterCardMove ([card, data, player]) {
-        data ? this.openCard(card, data) : this.closeCard(card);
+        data ? this.openCard(card, data)
+             : this.closeCard(card);
         player.cards.setCardOrder(card, player.getRightSidePlayerLastCard());
     }
 

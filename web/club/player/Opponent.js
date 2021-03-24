@@ -40,7 +40,9 @@ Club.DurakOpponent = class DurakOpponent extends Club.DurakPlayer {
     }
 
     getRightSidePlayerLastCard () {
-        return this.num > 1 ? this.play.players[this.num - 1].cards.last() : null;
+        return this.num > 1
+            ? this.play.players[this.num - 1].cards.last()
+            : null;
     }
 
     openCards (data) {

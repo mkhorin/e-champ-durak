@@ -43,7 +43,8 @@ Club.DurakStock = class DurakStock {
     }
 
     splice (amount) {
-        const cards = this.cards.splice(this.cards.count() < amount ? amount - 1 : amount).reverse();
+        const index = this.cards.count() < amount ? amount - 1 : amount;
+        const cards = this.cards.splice(index).reverse();
         if (cards.length < amount) {
             cards.push(this.trumpCard);
             this.trumpCard = null;

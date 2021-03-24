@@ -12,7 +12,7 @@ module.exports = class ContinueAction extends Base {
             return false;
         }
         if (!this.play.finished) {
-            return this.setError('Round is not over now');
+            return this.setError('Round is not over');
         }
         return true;
     }

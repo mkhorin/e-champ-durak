@@ -3,7 +3,7 @@
  */
 Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
 
-    static TOP_HALF_MULTIPLIER = 1.5;
+    static TOP_HALF_FACTOR = 1.5;
 
     constructor () {
         super(...arguments);
@@ -14,6 +14,10 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
 
     getContainer () {
         return this.play.find(`.master`);
+    }
+
+    update () {
+        this.canAct() ? this.activate() : this.deactivate();
     }
 
     canAct () {
@@ -34,10 +38,6 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
             return false;
         }
         return this.play.getActiveAttacker() === this;
-    }
-
-    update () {
-        this.canAct() ? this.activate() : this.deactivate();
     }
 
     activate () {
@@ -78,7 +78,8 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
         if (!this.cards.has(target)) {
             return false;
         }
-        const topHalf = event.offsetY * this.constructor.TOP_HALF_MULTIPLIER < this.play.getCardHeight();
+        const topOffset = event.offsetY * this.constructor.TOP_HALF_FACTOR;
+        const topHalf = topOffset < this.play.getCardHeight();
         if (this.selection === target) {
             return !topHalf || !this.move() ? this.resetSelection() : true;
         }

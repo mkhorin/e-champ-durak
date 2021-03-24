@@ -9,10 +9,10 @@ module.exports = {
 
     ...defaults,
 
-    Class: require('../DurakGame'),
+    Class: require('../Game'),
     label: 'Durak',
     play: {
-        Class: require('../DurakPlay')
+        Class: require('../play/Durak')
     },
     actions: {
         'attack': {
@@ -63,9 +63,9 @@ module.exports = {
     assets: require('./default-assets'),
     decks: require('./default-decks'),
     templates: {
-        'messages': 'template/messages',
-        'play': 'template/play',
-        'playback': 'template/play'
+        messages: 'template/messages',
+        play: 'template/play',
+        playback: 'template/play'
     },
     webPage: 'https://github.com/mkhorin/e-champ-durak'
 };

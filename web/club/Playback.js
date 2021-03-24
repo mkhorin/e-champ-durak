@@ -33,7 +33,6 @@ Club.DurakPlayback = class DurakPlayback extends Club.Durak {
     }
 
     startPlayback () {
-        const ended = this.events.process();
         this.events.process();
     }
 

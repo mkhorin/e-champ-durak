@@ -1,8 +1,8 @@
 # E-Champ Durak
 
-### The Durak is a browser card game.
+### The Durak is a online card game.
 
-This a module for [E-Champ](https://github.com/mkhorin/e-champ) platform.
+This is a module for [E-Champ](https://github.com/mkhorin/e-champ) gaming platform.
 
 The Durak game supports up to six players (bots and remote users) 
 and implements various options:
