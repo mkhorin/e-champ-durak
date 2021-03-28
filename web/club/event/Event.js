@@ -87,6 +87,7 @@ Club.DurakEvent = class DurakEvent {
 
     openCard (card, index) {
         card.open(this.items[index].rank, this.items[index].suit);
+        card.toggleClass('selected', false);
     }
 
     closeCard (card) {

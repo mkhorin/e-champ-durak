@@ -37,6 +37,7 @@ Jam.I18n.durak = {
     'Stop attack on picking up': 'Прекратить атаку при взятии',
 
     'Thinking...': 'Думаю...',
+    'This is an ambiguous defense. Choose one attacking card': 'Неоднозначная защита. Укажите атакующую карту',
     'Transferable durak': 'Переводной дурак',
 
     'Winner': 'Победитель',

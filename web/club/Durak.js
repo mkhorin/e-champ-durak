@@ -185,8 +185,8 @@ Club.Durak = class Durak extends Club.CardPlay {
         const counter = this.countRoundPlayers();
         for (let i = 1; i < counter; ++i) {
             const player = this.getPlayer((this.defender.pos + i) % counter);
-            if (player.cards.count() > this.table.countAttacks()) {
-                return player;
+            if (player.cards.count() > 0) {
+                return player.cards.count() > this.table.countAttacks() ? player : null;
             }
         }
     }

@@ -3,7 +3,8 @@
  */
 Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
 
-    static TOP_HALF_FACTOR = 1.5;
+    static AMBIGUOUS_MESSAGE = 'This is an ambiguous defense. Choose one attacking card';
+    static TOP_HALF_FACTOR = 1.9;
 
     constructor () {
         super(...arguments);
@@ -104,15 +105,19 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
         if (this.play.canTransfer(card)) {
             return this.transfer();
         }
-        target = this.play.table.resolveAttackingCard(card);
-        if (target) {
-            return this.defend(target);
+        const cards = this.play.table.getWeakerAttackingCards(card);
+        if (cards.length === 1) {
+            return this.defend(cards[0]);
+        }
+        if (cards.length > 1) {
+            return Jam.dialog.info(this.play.translate(this.constructor.AMBIGUOUS_MESSAGE), {
+                strictCancel: true
+            });
         }
     }
 
     attack () {
         if (this.play.getActiveAttacker() === this && this.play.canCardAttack(this.selection)) {
-            this.toggleSelectedClass(false);
             const cards = [this.selection.getData()];
             this.send(Club.Durak.ACTION_ATTACK, {cards});
             return true;
@@ -121,7 +126,6 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
 
     defend (target) {
         if (this.play.canBeat(target, this.selection)) {
-            this.toggleSelectedClass(false);
             const pairs = [[target.getData(), this.selection.getData()]];
             this.send(Club.Durak.ACTION_DEFEND, {pairs});
             return true;
@@ -129,7 +133,6 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
     }
 
     transfer () {
-        this.toggleSelectedClass(false);
         const cards = [this.selection.getData()];
         this.send(Club.Durak.ACTION_TRANSFER, {cards});
         return true;
@@ -183,7 +186,6 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
 
     send () {
         this.play.send(...arguments);
-        this.toggleSelectedClass(false);
         this.selection = null;
         this.deactivate();
     }

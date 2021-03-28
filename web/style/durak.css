@@ -40,7 +40,7 @@
     padding-left: 5px;
     font-size: 36px;
     text-align: left;
-    line-height: 72px;
+    line-height: 66px;
     opacity: var(--opponent-opacity);
 }
 .durak .player-avatar > span {
@@ -97,13 +97,13 @@
 .durak .player-end {
     display: none;
     position: absolute;
-    left: 26px;
+    left: 24px;
     top: 50px;
-    width: 32px;
-    height: 32px;
-    font-size: 24px;
+    width: 36px;
+    height: 36px;
+    font-size: 27px;
     text-align: center;
-    line-height: 29px;
+    line-height: 32px;
     background: #fff;
     background-repeat: no-repeat;
     background-position: center;
@@ -260,6 +260,7 @@
     top: 0;
     width: 100%;
     height: 220px;
+    z-index: 102;
 }
 .durak .opponents .player {
     position: relative;
@@ -303,6 +304,9 @@
     z-index: 10;
 }
 .durak .master-action {
+    --fill: #ddd;
+    --empty: #e0c0c0;
+    --rest: 0deg;
     position: absolute;
     left: 2px;
     top: 0;
@@ -310,10 +314,7 @@
     height: 62px;
     pointer-events: none;
     border-radius: 50%;
-    --fill: #ddd;
-    --empty: #e0c0c0;
-    --rest: 0deg;
-    color: #ccc;
+    color: #d0d0d0;
     background-color: #ccc;
 }
 .durak .master-action {
@@ -371,7 +372,7 @@
 }
 .durak .master-action .icon-move {
     display: none;
-    color: #aaa;
+    color: #00b000;
 }
 .durak .master-action .icon,
 .durak.master .master-action .icon-watching,
@@ -406,8 +407,8 @@
 }
 .durak .master .player-status,
 .durak .master .player-end {
-    top: -22px;
-    left: 17px;
+    top: -25px;
+    left: 16px;
 }
 .durak .master .player-attacker {
     transform: rotate(-45deg);
@@ -453,14 +454,14 @@
 }
 .durak .stock .trump-stamp {
     left: 30px;
-    top: 50px;
+    top: 58px;
 }
 .durak .table {
     position: absolute;
     left: 0;
     top: var(--center-top);
     height: 100px;
-    width: 80%;
+    width: 78%;
 }
 .durak .table-defense {
     position: absolute;
@@ -498,7 +499,7 @@
     --left: 80px;
     position: absolute;
     left: var(--left);
-    top: 410px;
+    top: 409px;
     width: calc(100% - var(--left));
     font-size: 16px;
 }
@@ -541,6 +542,7 @@
 .durak .turn-status {
     display: none;
     position: absolute;
+    z-index: 103 !important;
 }
 .durak.turning .turn-status {
     display: block;
@@ -626,10 +628,11 @@
     color: #666;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
 
-    .durak .opponents {
-        z-index: 2;
+    .durak .opponents .player-avatar {
+        height: 86px;
+        line-height: 56px;
     }
     .durak .opponents .player + .player {
         margin-left: 5px;
@@ -646,6 +649,11 @@
     }
     .durak .opponents .player-stat + .player-stat {
         margin-top: 2px;
+    }
+    .durak .opponents .player-status,
+    .durak .opponents .player-end {
+        left: 16px;
+        top: 46px;
     }
     .durak .player-message {
         position: absolute;
@@ -677,7 +685,8 @@
     }
     .durak .opponents .player-status,
     .durak .opponents .player-end {
-        top: 48px;
+        left: 12px;
+        top: 46px;
     }
     .durak .round-message {
         margin-top: 2px;
@@ -707,7 +716,7 @@
     }
     .durak .opponents .player-status,
     .durak .opponents .player-end {
-        left: 18px;
+        left: 10px;
         transform: scale(0.8);
         transform-origin: top left;
     }
@@ -744,8 +753,8 @@
     }
     .durak .opponents .player-status,
     .durak .opponents .player-end {
-        left: 8px;
-        top: 45px;
+        left: 6px;
+        top: 44px;
     }
     .durak .opponents .player-message {
         top: 74px;

@@ -116,14 +116,14 @@ Club.DurakTable = class DurakTable {
         return this.pairs[index]?.[1];
     }
 
-    resolveAttackingCard (card) {
+    getWeakerAttackingCards (defending) {
         const cards = [];
         for (const attacking of this.getOpenAttackingCards()) {
-            if (this.play.canBeat(attacking, card)) {
+            if (this.play.canBeat(attacking, defending)) {
                 cards.push(attacking);
             }
         }
-        return cards.length === 1 ? cards[0] : null;
+        return cards;
     }
 
     getOpenAttackingCards () {
