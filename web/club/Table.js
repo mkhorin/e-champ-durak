@@ -3,6 +3,8 @@
  */
 Club.DurakTable = class DurakTable {
 
+    static MAX_CARD_SPACE = 10;
+
     constructor (play) {
         this.play = play;
         this.clear();
@@ -172,7 +174,7 @@ Club.DurakTable = class DurakTable {
 
     getOffsetStep (total) {
         const cardWidth = this.play.getCardWidth();
-        return [Club.getOffsetStep(this.rect.w, cardWidth, total, Club.Durak.TABLE_CARD_SPACE), 0];
+        return [Club.getOffsetStep(this.rect.w, cardWidth, total, this.constructor.MAX_CARD_SPACE), 0];
     }
 
     arrange (addition = 0) {

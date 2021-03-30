@@ -31,12 +31,12 @@ module.exports = class Standard extends Base {
 
     defend () {
         if (this.canTransfer()) {
-            const card = this.getTransferCard();
+            const card = this.getCardToTransfer();
             if (card) {
                 return this.complete('transfer', {cards: [card]});
             }
         }
-        const pairs = this.getDefendingPairs();
+        const pairs = this.getPairsToDefend();
         if (pairs.length) {
             return this.complete('defend', {pairs});
         }
@@ -51,7 +51,7 @@ module.exports = class Standard extends Base {
         }
     }
 
-    getTransferCard () {
+    getCardToTransfer () {
         const attacking = this.table[0][0].rank;
         for (const card of this.cards) {
             if (card.rank === attacking) {
@@ -71,24 +71,29 @@ module.exports = class Standard extends Base {
         }
     }
 
-    getDefendingPairs () {
+    getPairsToDefend () {
         const pairs = [];
         const cards = this.cards.slice(0);
         for (let [attacking, defending] of this.table) {
-            if (!defending) {
-                defending = this.getDefendingCards(attacking, cards);
-                defending = this.filterLowestCards(defending)[0];
-                if (!defending) {
-                    return [];
-                }
-                cards.splice(cards.indexOf(defending), 1);
-                pairs.push([attacking, defending]);
+            if (defending) {
+                continue;
             }
+            defending = this.getCardToDefend(attacking, cards);
+            if (!defending) {
+                return [];
+            }
+            cards.splice(cards.indexOf(defending), 1);
+            pairs.push([attacking, defending]);
         }
         return pairs;
     }
 
-    getDefendingCards (attacking, cards) {
+    getCardToDefend () {
+        const cards = this.getCardsToDefend(...arguments);
+        return cards.length ? this.filterLowestCards(cards)[0] : null;
+    }
+
+    getCardsToDefend (attacking, cards) {
         const result = [];
         for (const card of cards) {
             if (this.canBeat(attacking, card)) {
@@ -117,31 +122,35 @@ module.exports = class Standard extends Base {
 
     attack () {
         const validCards = this.filterByTable(this.cards);
-        const cards = this.needAdvancedAttack()
-            ? this.resolveAdvancedAttack(validCards)
-            : this.resolveAttack(validCards);
+        const cards = this.getCardsToAttack(validCards);
         this.trimToMaxAttacks(cards);
         cards.length
             ? this.complete('attack', {cards})
             : this.complete('pass');
     }
 
-    resolveAttack (cards) {
-        return this.filterLowestCards(cards);
+    getCardsToAttack (validCards) {
+        return this.isLonelyAttack()
+            ? this.getCardsToLonelyAttack(validCards)
+            : this.getCardsToNormalAttack(validCards);
     }
 
-    needAdvancedAttack () {
+    isLonelyAttack () {
         return this.stock === 0 && this.cards.length > 1 && this.isOtherHandsEmpty();
     }
 
-    resolveAdvancedAttack (cards) {
+    getCardsToLonelyAttack (cards) {
         for (let i = 0; i < cards.length; ++i) {
             const card = cards[i];
             if (!this.canDefend(card) && this.isSameRank(cards, i)) {
                 return [card];
             }
         }
-        return this.resolveAttack(cards);
+        return this.getCardsToNormalAttack(cards);
+    }
+
+    getCardsToNormalAttack (validCards) {
+        return this.filterLowestCards(validCards);
     }
 
     canDefend (attacking) {
@@ -223,7 +232,7 @@ module.exports = class Standard extends Base {
         }
         let result = [cards[0]];
         for (let i = 1; i < cards.length; ++i) {
-            const diff = this.compareCards(result[0], cards[i]);
+            let diff = this.compareCards(result[0], cards[i]);
             if (diff > 0) {
                 result = [cards[i]];
             } else if (diff === 0) {

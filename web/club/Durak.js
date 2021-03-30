@@ -7,7 +7,6 @@ Club.Durak = class Durak extends Club.CardPlay {
 
     static CARD_SELECTION_OFFSET = 16;
     static MAX_PLAYERS = 6;
-    static TABLE_CARD_SPACE = 5;
     static STATUS_MOVE_DURATION = .5;
 
     static ACTION_ATTACK = 'attack';

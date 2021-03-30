@@ -82,7 +82,9 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
         const topOffset = event.offsetY * this.constructor.TOP_HALF_FACTOR;
         const topHalf = topOffset < this.play.getCardHeight();
         if (this.selection === target) {
-            return !topHalf || !this.move() ? this.resetSelection() : true;
+            return !topHalf || !this.move(null, true)
+                ? this.resetSelection()
+                : true;
         }
         if (!topHalf) {
             return this.setSelection(target);
@@ -91,7 +93,7 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
         this.move();
     }
 
-    move (target) {
+    move (target, reselection) {
         const card = this.selection;
         if (!card) {
             return false;
@@ -102,18 +104,19 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
         if (target) {
             return this.defend(target);
         }
-        if (this.play.canTransfer(card)) {
-            return this.transfer();
-        }
         const cards = this.play.table.getWeakerAttackingCards(card);
+        if (this.play.canTransfer(card)) {
+            return !cards.length || reselection ? this.transfer() : null;
+        }
         if (cards.length === 1) {
             return this.defend(cards[0]);
         }
-        if (cards.length > 1) {
-            return Jam.dialog.info(this.play.translate(this.constructor.AMBIGUOUS_MESSAGE), {
-                strictCancel: true
-            });
+        if (cards.length === 0 || !reselection) {
+            return;
         }
+        return Jam.dialog.info(this.play.translate(this.constructor.AMBIGUOUS_MESSAGE), {
+            strictCancel: true
+        });
     }
 
     attack () {

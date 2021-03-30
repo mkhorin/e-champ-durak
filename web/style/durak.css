@@ -561,14 +561,14 @@
     display: block;
     position: absolute;
     left: 0;
-    top: var(--center-top);
+    top: calc(var(--center-top) + .5rem);;
     width: 100%;
     z-index: -1;
     text-align: center;
     text-transform: uppercase;
     color: white;
     font-size: 7rem;
-    text-shadow: 0 0 6px #e0e0e0;
+    text-shadow: 0 0 6px #d8d8d8;
 }
 .durak.playback .playback-actions {
     display: block;
@@ -672,7 +672,9 @@
         display: block;
     }
     .durak.playback .playback-text {
+        font-size: 6rem;
         text-align: left;
+        top: calc(var(--center-top) + 1.5rem);
     }
 }
 @media (max-width: 480px) {
@@ -694,7 +696,8 @@
     }
     .durak.playback .playback-text {
         text-align: left;
-        font-size: 6rem;
+        font-size: 4.5rem;
+        top: calc(var(--center-top) + 2.5rem);
     }
 }
 @media (max-width: 420px) {
@@ -742,6 +745,10 @@
     .durak.playback .playback-replay {
         font-size: 5rem;
     }
+    .durak.playback .playback-text {
+        font-size: 4rem;
+        top: calc(var(--center-top) + 2.5rem);
+    }
 }
 @media (max-width: 350px) {
 
@@ -762,5 +769,9 @@
     }
     .durak .stock .trump-stamp {
         left: 10px;
+    }
+    .durak.playback .playback-text {
+        font-size: 3.3rem;
+        top: calc(var(--center-top) + 3.5rem);
     }
 }
