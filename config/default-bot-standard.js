@@ -7,7 +7,7 @@ module.exports = {
     
     label: 'Standard',
     solver: {
-        Class: require('../bot/Standard'),
+        Class: require('../bot/StandardSolver'),
     },
     translations: {
         'ru': {

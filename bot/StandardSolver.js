@@ -88,8 +88,8 @@ module.exports = class Standard extends Base {
         return pairs;
     }
 
-    getCardToDefend () {
-        const cards = this.getCardsToDefend(...arguments);
+    getCardToDefend (attacking, cards) {
+        cards = this.getCardsToDefend(attacking, cards);
         return cards.length ? this.filterLowestCards(cards)[0] : null;
     }
 
