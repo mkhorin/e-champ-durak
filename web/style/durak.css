@@ -424,11 +424,14 @@
 }
 .durak .master-cards {
     --left: 80px;
+    display: flex;
+    flex-flow: wrap;
     position: absolute;
     left: var(--left);
     top: 440px;
     width: calc(100% - var(--left));
-    height: 100px;
+    height: 130px;
+    overflow: auto;
 }
 .durak.master {
     pointer-events: auto;
@@ -436,6 +439,30 @@
 .durak.master .master-action.active {
     cursor: pointer;
     pointer-events: auto;
+}
+.durak .master-scale {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 26px;
+    height: 26px;
+    line-height: 24px;
+    color: var(--link);
+    text-align: center;
+    cursor: pointer;
+    z-index: 10;
+}
+.durak.master .master-scale {
+    display: block;
+}
+.durak.master-scaled .master-cards {
+    background: var(--body-background);
+    z-index: 10;
+}
+.durak.master-scaled .small-card {
+    display: inline-block;
+    margin: 0 5px 5px 0;
 }
 
 .durak .stock {
@@ -553,6 +580,7 @@
 .durak .playback-actions .playback-action-play,
 .durak.paused .playback-action-pause,
 .durak.playback .master-action,
+.durak.playback .master-scale,
 .durak .playback-text {
     display: none;
 }

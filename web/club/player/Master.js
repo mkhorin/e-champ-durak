@@ -4,11 +4,15 @@
 Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
 
     static AMBIGUOUS_MESSAGE = 'This is an ambiguous defense. Choose one attacking card';
-    static TOP_HALF_FACTOR = 1.9;
+    static CARD_BOTTOM_FACTOR = 1.8;
+    static CARD_HELP = 'Press on the top of a card to action. Press the bottom to toggle selection';
+    static CARD_HELP_KEY = 'club.durak.cardHelp';
 
     constructor () {
         super(...arguments);
         this.play.on('click', '.card[data-rank][data-suit]', this.onCard.bind(this));
+        this.play.on('click', '.master-cards .small-card', this.onSmallCard.bind(this));
+        this.play.on('click', '.master-scale', this.onScale.bind(this));
         this.$action = this.$container.find('.master-action');
         this.$action.click(this.onAction.bind(this));
     }
@@ -52,6 +56,7 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
         super.deactivate();
         this.play.toggleClass('master', false);
         this.toggleAction(false);
+        this.toggleScale(false);
         this.resetSelection();
     }
 
@@ -79,14 +84,16 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
         if (!this.cards.has(target)) {
             return false;
         }
-        const topOffset = event.offsetY * this.constructor.TOP_HALF_FACTOR;
-        const topHalf = topOffset < this.play.getCardHeight();
+        const bottom = event.offsetY * this.constructor.CARD_BOTTOM_FACTOR > this.play.getCardHeight();
+        if (bottom) {
+            this.showCardHelp();
+        }
         if (this.selection === target) {
-            return !topHalf || !this.move(null, true)
+            return bottom || !this.move(null, true)
                 ? this.resetSelection()
                 : true;
         }
-        if (!topHalf) {
+        if (bottom) {
             return this.setSelection(target);
         }
         this.setSelection(target);
@@ -111,12 +118,9 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
         if (cards.length === 1) {
             return this.defend(cards[0]);
         }
-        if (cards.length === 0 || !reselection) {
-            return;
+        if (cards.length && reselection) {
+            this.showMessage(this.constructor.AMBIGUOUS_MESSAGE);
         }
-        return Jam.dialog.info(this.play.translate(this.constructor.AMBIGUOUS_MESSAGE), {
-            strictCancel: true
-        });
     }
 
     attack () {
@@ -191,5 +195,48 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
         this.play.send(...arguments);
         this.selection = null;
         this.deactivate();
+    }
+
+    showCardHelp () {
+        if (!Jam.localStorage.get(this.constructor.CARD_HELP_KEY)) {
+            this.showMessage(this.constructor.CARD_HELP);
+            Jam.localStorage.set(this.constructor.CARD_HELP_KEY, true);
+        }
+    }
+
+    showMessage (message) {
+        return Jam.dialog.info(this.play.translate(message), {strictCancel: true});
+    }
+
+    onSmallCard (event) {
+        const {rank, suit} = $(event.target).data();
+        const card = this.cards.find(rank, suit);
+        this.toggleScale(false);
+        this.setSelection(card);
+    }
+
+    onScale () {
+        this.resetSelection();
+        this.toggleScale();
+        this.createSmallCards();
+    }
+
+    toggleScale () {
+        this.play.toggleClass('master-scaled', ...arguments);
+    }
+
+    createSmallCards () {
+        const $container = this.play.find('.master-cards').empty();
+        for (const card of this.cards) {
+            $container.append(this.createSmallCard(card));
+        }
+    }
+
+    createSmallCard (card) {
+        const element = document.createElement('div');
+        element.setAttribute('data-rank', card.getRank());
+        element.setAttribute('data-suit', card.getSuit());
+        element.classList.add('small-card');
+        return element;
     }
 };

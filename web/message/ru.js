@@ -30,6 +30,7 @@ Jam.I18n.durak = {
 
     'Pass': 'Пас',
     'Pick up': 'Забираю',
+    'Press on the top of a card to action. Press the bottom to toggle selection': 'Нажмите на верхнюю часть карты для действия. Нажмите на нижнюю часть для переключения выбора',
 
     'Ready': 'Готов',
 
