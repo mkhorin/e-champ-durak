@@ -25,6 +25,8 @@ Club.DurakPlayback = class DurakPlayback extends Club.Durak {
         super.start(...arguments);
         this.page.toggleLoading(false);
         this.toggleClass('hidden', false);
+        this.events.add(data.events);
+        this.processEvents();
     }
 
     processEvents () {
@@ -63,5 +65,11 @@ Club.DurakPlayback = class DurakPlayback extends Club.Durak {
         this.toggleClass('paused', ...arguments);
     }
 
+    attachSocket () {}
+
     startCountdown () {}
+
+    resolveLastHiddenEventIndex () {
+        return -1;
+    }
 };

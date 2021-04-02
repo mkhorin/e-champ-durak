@@ -1,6 +1,6 @@
 .durak{
      --center-top: 240px;
-     --stock-width: 20%;
+     --stock-width: 15%;
      --master-cards-left: 80px;
      --opponent-opacity: 0.5;
      --active-opponent-opacity: 0.9;
@@ -480,7 +480,7 @@
     width: 90%;
 }
 .durak .stock .trump-stamp {
-    left: 30px;
+    left: 20px;
     top: 58px;
 }
 .durak .table {
@@ -765,10 +765,10 @@
         --left: 64px;
     }
     .durak .stock .trump-stamp {
-        left: 20px;
+        left: 10px;
     }
     .durak .round-message {
-        --left: 48px;
+        --left: 0;
     }
     .durak.playback .playback-replay {
         font-size: 5rem;
@@ -796,7 +796,7 @@
         transform: scale(0.8);
     }
     .durak .stock .trump-stamp {
-        left: 10px;
+        left: 0;
     }
     .durak.playback .playback-text {
         font-size: 3.3rem;

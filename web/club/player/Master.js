@@ -89,9 +89,9 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
             this.showCardHelp();
         }
         if (this.selection === target) {
-            return bottom || !this.move(null, true)
+            return bottom
                 ? this.resetSelection()
-                : true;
+                : this.move(null, true);
         }
         if (bottom) {
             return this.setSelection(target);

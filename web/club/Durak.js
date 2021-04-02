@@ -55,13 +55,6 @@ Club.Durak = class Durak extends Club.CardPlay {
         this.master.pos = data.pos || 0;
         this.page.toggleLoading(true);
         this.events.clear();
-        this.events.add(data.events);
-        this.processEvents();
-    }
-
-    processEvents () {
-        this.events.hiddenIndex = this.resolveLastHiddenEventIndex();
-        this.events.process();
     }
 
     resolveLastHiddenEventIndex () {
@@ -91,7 +84,6 @@ Club.Durak = class Durak extends Club.CardPlay {
 
     clear () {
         super.clear();
-
         this.clearCards();
         this.stock.clear();
         this.table.clear();
@@ -307,6 +299,11 @@ Club.Durak = class Durak extends Club.CardPlay {
         this.toggleClass('show-statuses', false);
         this.toggleClass('turning', true);
         this.motion.done(() => this.toggleClass('turning', false));
+    }
+
+    moveCard (card) {
+        card.toggleClass('selected', false);
+        return super.moveCard(...arguments);
     }
 
     moveStatus (status, player, prevPlayer) {
