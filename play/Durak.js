@@ -365,9 +365,6 @@ module.exports = class Durak extends Base {
     }
 
     updateBots () {
-        for (const {player} of this.botHands) {
-            player.clearSolver();
-        }
         if (this.isFinished()) {
             return;
         }

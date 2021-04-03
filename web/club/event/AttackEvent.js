@@ -45,10 +45,15 @@ Club.DurakAttackEvent = class DurakAttackEvent extends Club.DurakEvent {
         const attacker = this.player;
         const cards = [];
         for (const {rank, suit} of this.items) {
-            const card = attacker.cards.find(rank, suit) || attacker.cards.last();
-            attacker.removeCard(card);
-            this.table.addAttack(card);
-            cards.push(card);
+            let card = attacker.cards.find(rank, suit);
+            if (!card && !this.isMaster()) {
+                card = attacker.cards.last();
+            }
+            if (card) {
+                attacker.removeCard(card);
+                this.table.addAttack(card);
+                cards.push(card);
+            }
         }
         this.play.isAttackLimit()
             ? this.play.players.forEach(player => player.setTurned(true))

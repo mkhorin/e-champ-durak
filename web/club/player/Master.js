@@ -127,6 +127,7 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
         if (this.play.getActiveAttacker() === this && this.play.canCardAttack(this.selection)) {
             const cards = [this.selection.getData()];
             this.send(Club.Durak.ACTION_ATTACK, {cards});
+            this.addPredictedEvent(Club.DurakEvent.ATTACK, [this.pos, cards]);
             return true;
         }
     }
@@ -135,6 +136,7 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
         if (this.play.canBeat(target, this.selection)) {
             const pairs = [[target.getData(), this.selection.getData()]];
             this.send(Club.Durak.ACTION_DEFEND, {pairs});
+            this.addPredictedEvent(Club.DurakEvent.DEFEND, [this.pos, pairs]);
             return true;
         }
     }
@@ -142,6 +144,8 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
     transfer () {
         const cards = [this.selection.getData()];
         this.send(Club.Durak.ACTION_TRANSFER, {cards});
+        const target = this.play.getTransferTarget();
+        this.addPredictedEvent(Club.DurakEvent.TRANSFER, [target.pos, cards]);
         return true;
     }
 
@@ -238,5 +242,10 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
         element.setAttribute('data-suit', card.getSuit());
         element.classList.add('small-card');
         return element;
+    }
+
+    addPredictedEvent () {
+        this.play.events.addPrediction(...arguments);
+        this.play.events.process();
     }
 };

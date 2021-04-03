@@ -36,10 +36,15 @@ Club.DurakTransferEvent = class DurakTransferEvent extends Club.DurakEvent {
         const defender = this.play.defender;
         const cards = [];
         for (const {rank, suit} of this.items) {
-            const card = defender.cards.find(rank, suit) || defender.cards.last();
-            defender.removeCard(card);
-            this.table.addAttack(card);
-            cards.push(card);
+            let card = defender.cards.find(rank, suit);
+            if (!card && this.play.defender !== this.play.master) {
+                card = defender.cards.last();
+            }
+            if (card) {
+                defender.removeCard(card);
+                this.table.addAttack(card);
+                cards.push(card);
+            }
         }
         this.play.setAttacker(defender);
         this.play.setDefender(this.player);

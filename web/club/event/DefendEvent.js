@@ -41,10 +41,15 @@ Club.DurakDefendEvent = class DurakDefendEvent extends Club.DurakEvent {
         const cards = [];
         for (let [attacking, defending] of this.items) {
             attacking = this.play.cards.find(attacking.rank, attacking.suit);
-            defending = defender.cards.find(defending.rank, defending.suit) || defender.cards.last();
-            defender.removeCard(defending);
-            this.table.addDefense(attacking, defending);
-            cards.push({attacking, defending});
+            defending = defender.cards.find(defending.rank, defending.suit);
+            if (!defending && !this.isMaster()) {
+                defending = defender.cards.last();
+            }
+            if (defending) {
+                defender.removeCard(defending);
+                this.table.addDefense(attacking, defending);
+                cards.push({attacking, defending});
+            }
         }
         this.play.updateTurnedPlayers();
         this.play.updatePlayerMessages();

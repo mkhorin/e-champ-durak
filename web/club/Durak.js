@@ -251,7 +251,9 @@ Club.Durak = class Durak extends Club.CardPlay {
     }
 
     onHandledEvents () {
-        this.master.update();
+        if (!this.events.prediction) {
+            this.master.update();
+        }
     }
 
     arrange () {
