@@ -55,8 +55,11 @@ Club.DurakPlayer = class DurakPlayer {
             if (!this.play.table.hasOpenAttack()) {
                 return Club.Durak.MESSAGE_WAIT;
             }
-            return this.turned
-                ? Club.Durak.MESSAGE_PICK_UP
+            if (this.turned) {
+                return Club.Durak.MESSAGE_PICK_UP;
+            }
+            return this.play.getActiveAttacker()
+                ? Club.Durak.MESSAGE_WAIT
                 : Club.Durak.MESSAGE_THINK;
         }
         if (this.play.isAttackLimit()) {

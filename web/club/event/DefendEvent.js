@@ -18,17 +18,19 @@ Club.DurakDefendEvent = class DurakDefendEvent extends Club.DurakEvent {
 
     processPairs (pairs) {
         pairs.forEach(this.processPair, this);
-        this.play.motion.done(() => {
-            this.player.arrange();
-            this.play.table.arrange();
-            this.finish();
-        });
+        this.play.motion.done(this.onMotionDone.bind(this));
     }
 
     processPair ({attacking, defending}, index) {
         const offset = this.table.getDefendingOffset(defending);
         this.play.moveCard(defending, offset)
             .done(() => this.openCard(defending, index));
+    }
+
+    onMotionDone () {
+        this.player.arrange();
+        this.play.table.arrange();
+        this.finishAfterMotion();
     }
 
     processHidden () {
@@ -51,9 +53,10 @@ Club.DurakDefendEvent = class DurakDefendEvent extends Club.DurakEvent {
                 cards.push({attacking, defending});
             }
         }
-        this.play.updateTurnedPlayers();
+        if (!this.table.hasOpenAttack()) {
+            this.play.updateTurnedPlayers();
+        }
         this.play.updatePlayerMessages();
-        this.play.master.update();
         this.play.resolveWinner(defender);
         return cards;
     }

@@ -19,6 +19,9 @@ module.exports = class DefendAction extends Base {
         if (this.hand !== play.defender) {
             return this.setError('Player cannot defend');
         }
+        if (play.getActiveAttacker()) {
+            return this.setError('Attack is not over yet');
+        }
         for (const item of items) {
             const [attacking, defending] = item;
             const pair = play.table.getPairByAttacking(attacking);
@@ -48,10 +51,14 @@ module.exports = class DefendAction extends Base {
             data.push([attacking.data, defending.data]);
             defending.faced = true;
         }
-        this.play.updateEmptyHands(this.hand);
-        this.play.updateFacedCards();
-        this.play.updateTurnedHands();
-        this.play.addEvent('defend', [this.hand.pos, data]);
-        this.play.endTurn();
+        const play = this.play;
+        play.changedDefendingCards = true;
+        play.updateEmptyHands(this.hand);
+        play.updateFacedCards();
+        if (!play.table.hasOpenAttack()) {
+            play.updateTurnedHands();
+        }
+        play.addEvent('defend', [this.hand.pos, data]);
+        play.endTurn();
     }
 };

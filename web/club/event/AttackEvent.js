@@ -18,17 +18,16 @@ Club.DurakAttackEvent = class DurakAttackEvent extends Club.DurakEvent {
     }
 
     arrangeCard (card) {
+        if (!this.isMaster()) {
+            this.closeCard(card);
+        }
         const index = this.table.getAttackingIndex(card);
         this.table.getDefendingCard(index - 1)?.after(card);
     }
 
     processCards (cards) {
         cards.forEach(this.processCard, this);
-        this.play.motion.done(() => {
-            this.player.arrange();
-            this.play.table.arrange();
-            this.finish();
-        });
+        this.play.motion.done(this.onMotionDone.bind(this));
     }
 
     processCard (card, index) {
@@ -36,8 +35,14 @@ Club.DurakAttackEvent = class DurakAttackEvent extends Club.DurakEvent {
         this.play.moveCard(card, offset).done(() => this.openCard(card, index));
     }
 
+    onMotionDone () {
+        this.player.arrange();
+        this.play.table.arrange();
+        this.finishAfterMotion();
+    }
+
     processHidden () {
-        this.execute().forEach(this.openCard, this);
+        this.execute();
         this.finish();
     }
 
@@ -48,6 +53,7 @@ Club.DurakAttackEvent = class DurakAttackEvent extends Club.DurakEvent {
             let card = attacker.cards.find(rank, suit);
             if (!card && !this.isMaster()) {
                 card = attacker.cards.last();
+                card.open(rank, suit);
             }
             if (card) {
                 attacker.removeCard(card);

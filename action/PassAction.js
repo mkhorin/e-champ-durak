@@ -12,8 +12,13 @@ module.exports = class PassAction extends Base {
             return false;
         }
         const play = this.play;
-        if (this.hand === play.defender && !play.table.hasOpenAttack()) {
-            return this.setError('No attack to pass');
+        if (this.hand === play.defender) {
+            if (play.getActiveAttacker()) {
+                return this.setError('Attack is not over yet');
+            }
+            if (!play.table.hasOpenAttack()) {
+                return this.setError('No attack to pass');
+            }
         }
         if (this.hand === play.attacker && play.table.isEmpty()) {
             return this.setError('Attacker cannot pass without attack');
@@ -24,8 +29,8 @@ module.exports = class PassAction extends Base {
     execute () {
         const play = this.play;
         play.addEvent('pass', [this.hand.pos]);
-        if (this.hand === play.defender && play.options.stopAttackOnPickingUp) {
-            play.hands.forEach(hand => hand.turned = true);
+        if (this.hand === play.defender && play.changedDefendingCards && !play.options.stopAttackOnPickingUp) {
+            play.updateTurnedHands();
         }
         this.hand.turned = true;
         play.endTurn();

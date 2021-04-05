@@ -7,50 +7,64 @@ Club.DurakTransferEvent = class DurakTransferEvent extends Club.DurakEvent {
 
     constructor () {
         super(...arguments);
+        this.from = this.play.defender;
+        this.target = this.player;
         this.items = this.data[1];
     }
 
     processNormal () {
         this.table.arrange(this.items.length);
-        this.execute().forEach(this.processCard, this);
+        this.executeCards().forEach(this.processCard, this);
         this.play.motion.done(this.processTurn.bind(this));
     }
 
     processCard (card, index) {
+        if (this.from !== this.play.master) {
+            this.closeCard(card);
+        }
         const offset = this.table.getAttackingOffset(card);
         this.play.moveCard(card, offset).done(() => this.openCard(card, index));
     }
 
     processTurn () {
-        this.play.attacker.arrange();
+        this.from.arrange();
+        this.executeTurn();
         this.play.showTurn();
         this.finishAfterMotion(this.constructor.PROCESS_DELAY);
     }
 
     processHidden () {
-        this.execute().forEach(this.openCard, this);
+        this.executeCards();
+        this.executeTurn();
         this.finish();
     }
 
-    execute () {
-        const defender = this.play.defender;
+    executeCards () {
         const cards = [];
         for (const {rank, suit} of this.items) {
-            let card = defender.cards.find(rank, suit);
-            if (!card && this.play.defender !== this.play.master) {
-                card = defender.cards.last();
+            let card = this.from.cards.find(rank, suit);
+            if (!card && this.from !== this.play.master) {
+                card = this.from.cards.last();
+                card.open(rank, suit);
             }
             if (card) {
-                defender.removeCard(card);
+                this.from.removeCard(card);
                 this.table.addAttack(card);
                 cards.push(card);
             }
         }
-        this.play.setAttacker(defender);
-        this.play.setDefender(this.player);
-        this.play.updateTurnedPlayers();
-        this.play.updatePlayerMessages();
-        this.play.resolveWinner(defender);
         return cards;
+    }
+
+    executeTurn () {
+        const play = this.play;
+        play.setAttacker(this.from);
+        play.setDefender(this.target);
+        play.isAttackLimit()
+            ? play.players.forEach(player => player.setTurned(true))
+            : play.updateTurnedPlayers();
+        play.defender.setTurned(false);
+        play.updatePlayerMessages();
+        play.resolveWinner(this.from);
     }
 };

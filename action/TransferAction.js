@@ -21,6 +21,9 @@ module.exports = class TransferAction extends Base {
         if (play.table.isEmpty() || play.table.hasAnyDefense()) {
             return this.setError('Transfer is not possible');
         }
+        if (play.getActiveAttacker()) {
+            return this.setError('Attack is not over yet');
+        }
         const cards = play.deck.parseCards(this.data.cards);
         if (!cards || !cards.length) {
             return this.setError('Invalid cards');

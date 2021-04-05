@@ -77,6 +77,7 @@ module.exports = class Durak extends Base {
             : this.resolveRoundAttacker();
         this.defender = this.getLeftSideHandWithCards(this.attacker);
         this.picked = false;
+        this.changedDefendingCards = false;
         this.updateTurnedHands();
         this.addEvent('turn', {
             attacker: this.attacker?.pos,
@@ -368,15 +369,14 @@ module.exports = class Durak extends Base {
         if (this.isFinished()) {
             return;
         }
+        if (!this.isAttackLimit()) {
+            const attacker = this.getActiveAttacker();
+            if (attacker) {
+                return attacker?.isBot() ? this.startBot(attacker) : null;
+            }
+        }
         if (!this.defender.turned && this.defender.isBot() && this.table.hasOpenAttack()) {
             this.startBot(this.defender);
-        }
-        if (this.isAttackLimit()) {
-            return;
-        }
-        const attacker = this.getActiveAttacker();
-        if (attacker?.isBot()) {
-            this.startBot(attacker);
         }
     }
 

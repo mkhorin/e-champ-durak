@@ -71,9 +71,12 @@ module.exports = class AttackAction extends Base {
         play.updateFacedCards();
         this.hand.turned = this.hand.isEmpty();
         if (play.isAttackLimit()) {
-            play.hands.forEach(hand => hand.turned = true);
+            for (const hand of play.hands) {
+                hand.turned = true;
+            }
         }
         play.defender.turned = false;
+        play.changedDefendingCards = false;
         play.addEvent('attack', [this.hand.pos, data]);
         play.endTurn();
     }
