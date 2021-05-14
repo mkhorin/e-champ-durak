@@ -620,11 +620,11 @@
     opacity: .8;
 }
 .durak .playback-action-pause {
-    color: var(--danger);
+    color: var(--dark-danger);
 }
 .durak.paused .playback-action-play {
     display: flex;
-    color: var(--success);
+    color: var(--dark-success);
 }
 .durak .playback-action-play:hover,
 .durak .playback-action-pause:hover {
