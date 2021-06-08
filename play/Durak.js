@@ -120,7 +120,7 @@ module.exports = class Durak extends Base {
                 lowestHands.push(hand);
             }
         }
-        return ArrayHelper.getRandom(lowestHands);
+        return ArrayHelper.random(lowestHands);
     }
 
     endRound () {

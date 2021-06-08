@@ -14,7 +14,6 @@ module.exports = {
             'club'
         ],
         target: 'vendor/durak.min.js',
-        copyright: `/* @copyright Copyright (c) 2021 Maxim Khorin <maksimovichu@gmail.com> */\n`,
-        logging: true
+        copyright: `/* @copyright Copyright (c) 2021 Maxim Khorin <maksimovichu@gmail.com> */\n`
     }]
 };
