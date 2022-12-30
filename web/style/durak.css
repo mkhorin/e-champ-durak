@@ -1,218 +1,218 @@
-.durak{
-     --center-top: 240px;
-     --stock-width: 15%;
-     --master-cards-left: 80px;
-     --opponent-opacity: 0.5;
-     --active-opponent-opacity: 0.9;
+.durak {
+  --center-top: 240px;
+  --stock-width: 15%;
+  --master-cards-left: 80px;
+  --opponent-opacity: 0.5;
+  --active-opponent-opacity: 0.9;
 
-     position: relative;
-     height: 600px;
-     pointer-events: none;
-     overflow: hidden;
-     user-select: none;
- }
+  position: relative;
+  height: 600px;
+  pointer-events: none;
+  overflow: hidden;
+  user-select: none;
+}
 .durak .player {
-    position: relative;
+  position: relative;
 }
 .durak .player-name {
-    position: absolute;
-    left: 0;
-    top: 0;
-    max-width: 100%;
-    min-width: 50px;
-    padding: 0 6px;
-    text-align: center;
-    color: #fff;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    opacity: var(--opponent-opacity);
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: 100%;
+  min-width: 50px;
+  padding: 0 6px;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  opacity: var(--opponent-opacity);
 }
 .durak .player-avatar {
-    position: absolute;
-    top: 20px;
-    left: 0;
-    width: 52px;
-    height: 54px;
-    border-left: 2px solid #000;
-    padding-left: 5px;
-    font-size: 36px;
-    text-align: left;
-    line-height: 66px;
-    opacity: var(--opponent-opacity);
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 52px;
+  height: 54px;
+  border-left: 2px solid #000;
+  padding-left: 5px;
+  font-size: 36px;
+  text-align: left;
+  line-height: 66px;
+  opacity: var(--opponent-opacity);
 }
 .durak .player-avatar > span {
-    display: none;
+  display: none;
 }
 .durak [data-type="bot"] .player-avatar .bot,
 .durak [data-type="remote"] .player-avatar .remote {
-    display: inline-block;
+  display: inline-block;
 }
 .durak .player-stats {
-    position: absolute;
-    left: 64px;
-    top: 55px;
+  position: absolute;
+  left: 64px;
+  top: 55px;
 }
 .durak .player-stat {
-    position: relative;
-    display: inline-block;
-    padding: 0 3px;
-    line-height: 18px;
-    color: #000;
-    border-radius: 4px;
-    font-size: 12px;
-    text-align: right;
-    width: 20px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  position: relative;
+  display: inline-block;
+  padding: 0 3px;
+  line-height: 18px;
+  color: #000;
+  border-radius: 4px;
+  font-size: 12px;
+  text-align: right;
+  width: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .durak .player-stat-won {
-    color: #008000;
-    background: #bbf0bb;
+  color: #008000;
+  background: #bbf0bb;
 }
 .durak .player-stat-lost {
-    color: #800000;
-    background: #ffcaca;
+  color: #800000;
+  background: #ffcaca;
 }
 .durak .player-stat-drawn {
-    color:#444;
-    background: #ccc;
+  color:#444;
+  background: #ccc;
 }
 .durak .player[data-end="winner"] .player-stat-won {
-    color: #fff;
-    background: #00d000;
+  color: #fff;
+  background: #00d000;
 }
 .durak .player[data-end="loser"] .player-stat-lost {
-    color: #fff;
-    background: #e00000;
+  color: #fff;
+  background: #e00000;
 }
 .durak .player[data-end="draw"] .player-stat-drawn {
-    color: #fff;
-    background: #888;
+  color: #fff;
+  background: #888;
 }
 
 .durak .player-status,
 .durak .player-end {
-    display: none;
-    position: absolute;
-    left: 24px;
-    top: 50px;
-    width: 36px;
-    height: 36px;
-    font-size: 27px;
-    text-align: center;
-    line-height: 32px;
-    background: #fff;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 60%;
-    border-radius: 50%;
-    border: 1px solid #888;
+  display: none;
+  position: absolute;
+  left: 24px;
+  top: 50px;
+  width: 36px;
+  height: 36px;
+  font-size: 27px;
+  text-align: center;
+  line-height: 32px;
+  background: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+  border-radius: 50%;
+  border: 1px solid #888;
 }
 .durak .player-attacker {
-    background-image: url(../image/sword.svg);
+  background-image: url(../image/sword.svg);
 }
 .durak .player-defender {
-    background-image: url(../image/schield.svg);
+  background-image: url(../image/schield.svg);
 }
 .durak .player-attacker {
-    background-image: url(../image/sword.svg);
+  background-image: url(../image/sword.svg);
 }
 .durak .player-defender {
-    background-image: url(../image/schield.svg);
+  background-image: url(../image/schield.svg);
 }
 .durak .player-message {
-    position: absolute;
-    left: 50px;
-    top: 24px;
-    padding: 2px 6px;
-    background: #ffe;
-    border: 1px solid #999;
-    border-radius: 4px;
+  position: absolute;
+  left: 50px;
+  top: 24px;
+  padding: 2px 6px;
+  background: #ffe;
+  border: 1px solid #999;
+  border-radius: 4px;
 }
 .durak .player-message:before {
-    content: "";
-    position: absolute;
-    left: -5px;
-    top: 8px;
-    height: 8px;
-    width: 8px;
-    background: #ffe;
-    transform: rotate(45deg);
-    border-bottom: inherit;
-    border-left: inherit;
-    box-shadow: inherit;
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 8px;
+  height: 8px;
+  width: 8px;
+  background: #ffe;
+  transform: rotate(45deg);
+  border-bottom: inherit;
+  border-left: inherit;
+  box-shadow: inherit;
 }
 .durak .player-message:empty {
-    display: none;
+  display: none;
 }
 
 .durak .player-card-counter {
-    display: none;
-    position: absolute;
-    left: 8px;
-    bottom: 10px;
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    font-size: 12px;
-    line-height: 18px;
-    text-align: center;
-    color: #222;
-    border: 1px solid #888;
-    border-radius: 50%;
-    z-index: 2;
+  display: none;
+  position: absolute;
+  left: 8px;
+  bottom: 10px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  color: #222;
+  border: 1px solid #888;
+  border-radius: 50%;
+  z-index: 2;
 }
 .durak .player-card-counter.empty {
-    display: none !important;
+  display: none !important;
 }
 .durak .player-cards {
-    position: absolute;
-    left: 0;
-    top: 90px;
-    width: calc(100% - 20px);
+  position: absolute;
+  left: 0;
+  top: 90px;
+  width: calc(100% - 20px);
 }
 .durak .opponent-1 .player-avatar {
-    color: #b4b;
-    border-color: #80a;
+  color: #b4b;
+  border-color: #80a;
 }
 .durak .opponent-1 .player-name {
-    color: #fdf;
-    background: #80a;
+  color: #fdf;
+  background: #80a;
 }
 .durak .opponent-2 .player-avatar {
-    color: #089;
-    border-color: #088;
+  color: #089;
+  border-color: #088;
 }
 .durak .opponent-2 .player-name {
-    color: #dff;
-    background: #088;
+  color: #dff;
+  background: #088;
 }
 .durak .opponent-3 .player-avatar {
-    color: #c40;
-    border-color: #a40;
+  color: #c40;
+  border-color: #a40;
 }
 .durak .opponent-3 .player-name {
-    color: #fdd;
-    background: #a40;
+  color: #fdd;
+  background: #a40;
 }
 .durak .opponent-4 .player-avatar {
-    color: #094;
-    border-color: #084;
+  color: #094;
+  border-color: #084;
 }
 .durak .opponent-4 .player-name {
-    color: #efe;
-    background: #084;
+  color: #efe;
+  background: #084;
 }
 .durak .opponent-5 .player-avatar {
-    color: #20c;
-    border-color: #20a;
+  color: #20c;
+  border-color: #20a;
 }
 .durak .opponent-5 .player-name {
-    color: #ddf;
-    background: #20a;
+  color: #ddf;
+  background: #20a;
 }
 
 .durak[data-attacker="1"] .opponent-1 .player-avatar,
@@ -235,7 +235,7 @@
 .durak[data-defender="4"] .opponent-4 .player-name,
 .durak[data-defender="5"] .opponent-5 .player-avatar,
 .durak[data-defender="5"] .opponent-5 .player-name {
-    opacity: var(--active-opponent-opacity);
+  opacity: var(--active-opponent-opacity);
 }
 
 .durak[data-attacker="0"] .master .player-attacker,
@@ -250,25 +250,25 @@
 .durak[data-defender="3"] .opponent-3 .player-defender,
 .durak[data-defender="4"] .opponent-4 .player-defender,
 .durak[data-defender="5"] .opponent-5 .player-defender {
-    display: block;
+  display: block;
 }
 
 .durak .opponents {
-    display: flex;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 220px;
-    z-index: 102;
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 220px;
+  z-index: 102;
 }
 .durak .opponents .player {
-    position: relative;
-    width: 100%;
-    height: 100%;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 .durak .opponents .player + .player{
-    margin-left: 15px;
+  margin-left: 15px;
 }
 .durak[data-opponents="1"] .opponent-2,
 .durak[data-opponents="1"] .opponent-3,
@@ -280,99 +280,99 @@
 .durak[data-opponents="3"] .opponent-4,
 .durak[data-opponents="3"] .opponent-5,
 .durak[data-opponents="4"] .opponent-5 {
-    display: none;
+  display: none;
 }
 .durak[data-opponents="2"] .opponents .player {
-    width: 50%;
+  width: 50%;
 }
 .durak[data-opponents="3"] .opponents .player {
-    width: 33%;
+  width: 33%;
 }
 .durak[data-opponents="4"] .opponents .player {
-    width: 25%;
+  width: 25%;
 }
 .durak[data-opponents="5"] .opponents .player {
-    width: 20%;
+  width: 20%;
 }
 
 .durak .master {
-    position: absolute;
-    left: 0;
-    top: 450px;
-    width: 70px;
-    height: 100px;
-    z-index: 10;
+  position: absolute;
+  left: 0;
+  top: 450px;
+  width: 70px;
+  height: 100px;
+  z-index: 10;
 }
 .durak .master-action {
-    --fill: #ddd;
-    --empty: #e0c0c0;
-    --rest: 0deg;
-    position: absolute;
-    left: 2px;
-    top: 0;
-    width: 62px;
-    height: 62px;
-    pointer-events: none;
-    border-radius: 50%;
-    color: #d0d0d0;
-    background-color: #ccc;
+  --fill: #ddd;
+  --empty: #e0c0c0;
+  --rest: 0deg;
+  position: absolute;
+  left: 2px;
+  top: 0;
+  width: 62px;
+  height: 62px;
+  pointer-events: none;
+  border-radius: 50%;
+  color: #d0d0d0;
+  background-color: #ccc;
 }
 .durak .master-action {
-    background-color: var(--empty);
-    background-image:
-            linear-gradient(180deg, var(--fill) 50%, transparent 50%),
-            linear-gradient(var(--rest), var(--fill) 50%, transparent 50%);
+  background-color: var(--empty);
+  background-image:
+      linear-gradient(180deg, var(--fill) 50%, transparent 50%),
+      linear-gradient(var(--rest), var(--fill) 50%, transparent 50%);
 }
 .durak .master-action.less-half {
-    background-color: var(--fill);
-    background-image:
-            linear-gradient(0deg, var(--empty) 50%, transparent 50%),
-            linear-gradient(var(--rest), var(--empty) 50%, transparent 50%);
+  background-color: var(--fill);
+  background-image:
+      linear-gradient(0deg, var(--empty) 50%, transparent 50%),
+      linear-gradient(var(--rest), var(--empty) 50%, transparent 50%);
 }
 .durak.master .master-action {
-    --fill: #a0e0a0;
-    --empty: #ffa0a0;
+  --fill: #a0e0a0;
+  --empty: #ffa0a0;
 }
 .durak .master .player-name {
-    top: 125px;
-    max-width: none;
-    padding: 0;
-    background: transparent;
-    color: #888;
-    text-align: left;
-    opacity: 1;
+  top: 125px;
+  max-width: none;
+  padding: 0;
+  background: transparent;
+  color: #888;
+  text-align: left;
+  opacity: 1;
 }
 
 .durak .master-action.active {
-    color: #00b000;
-    cursor: pointer;
-    pointer-events: auto;
+  color: #00b000;
+  cursor: pointer;
+  pointer-events: auto;
 }
 .durak .master-action.active:hover {
-    color: #00c000;
+  color: #00c000;
 }
 .durak[data-defender="0"] .master-action.active {
-    color: #c00000;
+  color: #c00000;
 }
 .durak[data-defender="0"] .master-action.active:hover {
-    color: #e00000;
+  color: #e00000;
 }
 .durak.end .master-action.active {
-    color: #08c;
-    animation: continue;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
+  color: #08c;
+  animation: continue;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
 }
 .durak.end .master-action.active:hover {
-    color: #0ae;
+  color: #0ae;
 }
 @keyframes continue {
-    0% {color: #f04;}
-    50% {color: #08d; }
+  0% {color: #f04;}
+  50% {color: #08d; }
 }
 .durak .master-action .icon-move {
-    display: none;
-    color: #00b000;
+  display: none;
+  color: #00b000;
 }
 .durak .master-action .icon,
 .durak.master .master-action .icon-watching,
@@ -383,197 +383,197 @@
 .durak.end[data-defender="0"] .master-action.active .icon-pick-up,
 .durak.end .master .master-action .icon-pass,
 .durak.end .master .master-action .icon-move {
-    display: none;
+  display: none;
 }
 .durak .master-action.active .icon-pass,
 .durak[data-defender="0"] .master-action.active .icon-pick-up,
 .durak.end .master-action.active .icon-continue,
 .durak.master .master-action .icon-move {
-    display: inline-block;
+  display: inline-block;
 }
 
 .durak .master-action-icon {
-    display: flex;
-    position: absolute;
-    left: 6px;
-    top: 6px;
-    width: 50px;
-    height: 50px;
-    font-size: 32px;
-    background: #fff;
-    border-radius: 50%;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  width: 50px;
+  height: 50px;
+  font-size: 32px;
+  background: #fff;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
 }
 .durak .master .player-status,
 .durak .master .player-end {
-    top: -25px;
-    left: 16px;
+  top: -25px;
+  left: 16px;
 }
 .durak .master .player-attacker {
-    transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }
 .durak .master .player-stats {
-    position: absolute;
-    left: 0;
-    top: 86px;
+  position: absolute;
+  left: 0;
+  top: 86px;
 }
 .durak .master .player-stat {
-    position: static;
-    display: inline-block;
+  position: static;
+  display: inline-block;
 }
 .durak .master-cards {
-    --left: 80px;
-    display: flex;
-    flex-flow: wrap;
-    position: absolute;
-    left: var(--left);
-    top: 440px;
-    width: calc(100% - var(--left));
-    height: 130px;
-    overflow: auto;
+  --left: 80px;
+  display: flex;
+  flex-flow: wrap;
+  position: absolute;
+  left: var(--left);
+  top: 440px;
+  width: calc(100% - var(--left));
+  height: 130px;
+  overflow: auto;
 }
 .durak.master {
-    pointer-events: auto;
+  pointer-events: auto;
 }
 .durak.master .master-action.active {
-    cursor: pointer;
-    pointer-events: auto;
+  cursor: pointer;
+  pointer-events: auto;
 }
 .durak .master-scale {
-    display: none;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 26px;
-    height: 26px;
-    line-height: 24px;
-    color: var(--link);
-    text-align: center;
-    cursor: pointer;
-    z-index: 10;
+  display: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 26px;
+  height: 26px;
+  line-height: 24px;
+  color: var(--link);
+  text-align: center;
+  cursor: pointer;
+  z-index: 10;
 }
 .durak.master .master-scale {
-    display: block;
+  display: block;
 }
 .durak.master-scaled .master-cards {
-    background: var(--body-background);
-    z-index: 10;
+  background: var(--body-background);
+  z-index: 10;
 }
 .durak.master-scaled .small-card {
-    display: inline-block;
-    margin: 0 5px 5px 0;
+  display: inline-block;
+  margin: 0 5px 5px 0;
 }
 
 .durak .stock {
-    position: absolute;
-    right: 0;
-    top: var(--center-top);
-    height: 100px;
-    width: var(--stock-width);
+  position: absolute;
+  right: 0;
+  top: var(--center-top);
+  height: 100px;
+  width: var(--stock-width);
 }
 .durak .stock-pile {
-    position: absolute;
-    left: 10%;
-    top: 32px;
-    height: 100%;
-    width: 90%;
+  position: absolute;
+  left: 10%;
+  top: 32px;
+  height: 100%;
+  width: 90%;
 }
 .durak .stock .trump-stamp {
-    left: 20px;
-    top: 58px;
+  left: 20px;
+  top: 58px;
 }
 .durak .table {
-    position: absolute;
-    left: 0;
-    top: var(--center-top);
-    height: 100px;
-    width: 78%;
+  position: absolute;
+  left: 0;
+  top: var(--center-top);
+  height: 100px;
+  width: 78%;
 }
 .durak .table-defense {
-    position: absolute;
-    left: 20px;
-    top: 32px;
-    width: calc(100% - 20px);
-    height: 100%;
+  position: absolute;
+  left: 20px;
+  top: 32px;
+  width: calc(100% - 20px);
+  height: 100%;
 }
 .durak .discard {
-    position: absolute;
-    left: -100px;
-    top: var(--center-top);
-    height: 84px;
-    width: 84px;
+  position: absolute;
+  left: -100px;
+  top: var(--center-top);
+  height: 84px;
+  width: 84px;
 }
 .durak .player-winner {
-    color: #00d000;
-    border-color: #00c000;
+  color: #00d000;
+  border-color: #00c000;
 }
 .durak .player-loser {
-    color: #a00000;
-    border-color: #d00000;
+  color: #a00000;
+  border-color: #d00000;
 }
 .durak .player-draw {
-    color: #888;
-    border-color: #888;
+  color: #888;
+  border-color: #888;
 }
 .durak .player[data-end="winner"] .player-winner,
 .durak .player[data-end="loser"] .player-loser,
 .durak .player[data-end="draw"] .player-draw {
-    display: block;
+  display: block;
 }
 
 .durak .round-message {
-    --left: 80px;
-    position: absolute;
-    left: var(--left);
-    top: 409px;
-    width: calc(100% - var(--left));
-    font-size: 16px;
+  --left: 80px;
+  position: absolute;
+  left: var(--left);
+  top: 409px;
+  width: calc(100% - var(--left));
+  font-size: 16px;
 }
 .durak .round-message > div {
-    display: none;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    opacity: 0.9;
+  display: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.9;
 }
 .durak .round-message-won {
-    color: #0a0;
+  color: #0a0;
 }
 .durak .round-message-lost {
-    color: #a00;
+  color: #a00;
 }
 .durak .round-message-drawn {
-    color: #555;
+  color: #555;
 }
 .durak .round-message-out {
-    color: #468;
+  color: #468;
 }
 .durak .round-message[data-status="out"] .round-message-out,
 .durak .round-message[data-status="winner"] .round-message-won,
 .durak.end .round-message[data-status="loser"] .round-message-lost,
 .durak.end .round-message[data-status="draw"] .round-message-drawn {
-    display: block;
+  display: block;
 }
 .durak.end .player .player-status,
 .durak.end .master .player-status {
-    display: none;
+  display: none;
 }
 
 .durak.show-statuses .player-status {
-    display: block;
+  display: block;
 }
 .durak.show-statuses .master .player-attacker {
-    transform: none;
+  transform: none;
 }
 .durak .turn-status {
-    display: none;
-    position: absolute;
-    z-index: 103 !important;
+  display: none;
+  position: absolute;
+  z-index: 103 !important;
 }
 .durak.turning .turn-status {
-    display: block;
-    z-index: 101;
+  display: block;
+  z-index: 101;
 }
 .durak.turning .player .player-status,
 .durak .playback-actions,
@@ -582,223 +582,223 @@
 .durak.playback .master-action,
 .durak.playback .master-scale,
 .durak .playback-text {
-    display: none;
+  display: none;
 }
 
 .durak.playback .playback-text {
-    display: block;
-    position: absolute;
-    left: 0;
-    top: calc(var(--center-top) + .5rem);;
-    width: 100%;
-    z-index: -1;
-    text-align: center;
-    text-transform: uppercase;
-    color: white;
-    font-size: 7rem;
-    text-shadow: 0 0 6px #d8d8d8;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: calc(var(--center-top) + .5rem);;
+  width: 100%;
+  z-index: -1;
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+  font-size: 7rem;
+  text-shadow: 0 0 6px #d8d8d8;
 }
 .durak.playback .playback-actions {
-    display: block;
-    pointer-events: auto;
+  display: block;
+  pointer-events: auto;
 }
 .durak .playback-action-play,
 .durak .playback-action-pause {
-    display: flex;
-    position: absolute;
-    left: 2px;
-    top: 0;
-    width: 62px;
-    height: 62px;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #bbb;
-    border-radius: 50%;
-    background: #fff;
-    font-size: 36px;
-    cursor: pointer;
-    opacity: .8;
+  display: flex;
+  position: absolute;
+  left: 2px;
+  top: 0;
+  width: 62px;
+  height: 62px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #bbb;
+  border-radius: 50%;
+  background: #fff;
+  font-size: 36px;
+  cursor: pointer;
+  opacity: .8;
 }
 .durak .playback-action-pause {
-    color: var(--dark-danger);
+  color: var(--dark-danger);
 }
 .durak.paused .playback-action-play {
-    display: flex;
-    color: var(--dark-success);
+  display: flex;
+  color: var(--dark-success);
 }
 .durak .playback-action-play:hover,
 .durak .playback-action-pause:hover {
-    opacity: 1;
+  opacity: 1;
 }
 .durak .playback-action-start,
 .durak .playback-action-end {
-    display: flex;
-    position: absolute;
-    top: 50px;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    border: 1px solid #aaa;
-    color: #aaa;
-    background: #fff;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+  display: flex;
+  position: absolute;
+  top: 50px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid #aaa;
+  color: #aaa;
+  background: #fff;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 .durak .playback-action-start {
-    left: 0;
+  left: 0;
 }
 .durak .playback-action-end {
-    right: 0;
+  right: 0;
 }
 .durak .playback-action-start:hover,
 .durak .playback-action-end:hover {
-    color: #666;
+  color: #666;
 }
 
 @media (max-width: 992px) {
 
-    .durak .opponents .player-avatar {
-        height: 86px;
-        line-height: 56px;
-    }
-    .durak .opponents .player + .player {
-        margin-left: 5px;
-    }
-    .durak .opponents .player-stats {
-        top: 24px;
-        left: 58px;
-        transform: scale(0.9);
-        transform-origin: top left;
-    }
-    .durak .opponents .player-stat {
-        position: relative;
-        display: block;
-    }
-    .durak .opponents .player-stat + .player-stat {
-        margin-top: 2px;
-    }
-    .durak .opponents .player-status,
-    .durak .opponents .player-end {
-        left: 16px;
-        top: 46px;
-    }
-    .durak .player-message {
-        position: absolute;
-        left: 0;
-        top: 84px;
-    }
-    .durak .player-message:before {
-        left: 8px;
-        top: -5px;
-        border-bottom: none;
-        border-right: none;
-        border-top: inherit;
-        border-left: inherit;
-    }
-    .durak .player-card-counter {
-        display: block;
-    }
-    .durak.playback .playback-text {
-        font-size: 6rem;
-        text-align: left;
-        top: calc(var(--center-top) + 1.5rem);
-    }
+  .durak .opponents .player-avatar {
+    height: 86px;
+    line-height: 56px;
+  }
+  .durak .opponents .player + .player {
+    margin-left: 5px;
+  }
+  .durak .opponents .player-stats {
+    top: 24px;
+    left: 58px;
+    transform: scale(0.9);
+    transform-origin: top left;
+  }
+  .durak .opponents .player-stat {
+    position: relative;
+    display: block;
+  }
+  .durak .opponents .player-stat + .player-stat {
+    margin-top: 2px;
+  }
+  .durak .opponents .player-status,
+  .durak .opponents .player-end {
+    left: 16px;
+    top: 46px;
+  }
+  .durak .player-message {
+    position: absolute;
+    left: 0;
+    top: 84px;
+  }
+  .durak .player-message:before {
+    left: 8px;
+    top: -5px;
+    border-bottom: none;
+    border-right: none;
+    border-top: inherit;
+    border-left: inherit;
+  }
+  .durak .player-card-counter {
+    display: block;
+  }
+  .durak.playback .playback-text {
+    font-size: 6rem;
+    text-align: left;
+    top: calc(var(--center-top) + 1.5rem);
+  }
 }
 @media (max-width: 480px) {
 
-    .durak .opponents .player-name {
-        font-size: 12px;
-    }
-    .durak .opponents .player-avatar {
-        top: 17px;
-    }
-    .durak .opponents .player-status,
-    .durak .opponents .player-end {
-        left: 12px;
-        top: 46px;
-    }
-    .durak .round-message {
-        font-size: 15px;
-    }
-    .durak.playback .playback-text {
-        text-align: left;
-        font-size: 4.5rem;
-        top: calc(var(--center-top) + 2.5rem);
-    }
+  .durak .opponents .player-name {
+    font-size: 12px;
+  }
+  .durak .opponents .player-avatar {
+    top: 17px;
+  }
+  .durak .opponents .player-status,
+  .durak .opponents .player-end {
+    left: 12px;
+    top: 46px;
+  }
+  .durak .round-message {
+    font-size: 15px;
+  }
+  .durak.playback .playback-text {
+    text-align: left;
+    font-size: 4.5rem;
+    top: calc(var(--center-top) + 2.5rem);
+  }
 }
 @media (max-width: 420px) {
 
-    .durak .opponents .player-avatar {
-        transform: scale(0.8);
-        transform-origin: top left;
-    }
-    .durak .opponents .player-stats {
-        left: 46px;
-        transform: scale(0.8);
-        transform-origin: top left;
-    }
-    .durak .opponents .player-message {
-        left: 0;
-        top: 76px;
-        transform: scale(0.9);
-        transform-origin: top left;
-    }
-    .durak .opponents .player-status,
-    .durak .opponents .player-end {
-        left: 10px;
-        transform: scale(0.8);
-        transform-origin: top left;
-    }
-    .durak .master {
-        transform: scale(0.8);
-        transform-origin: top left;
-    }
-    .durak .master .player-name {
-        top: 155px;
-    }
-    .durak .master .player-stats {
-        top: 100px;
-    }
-    .durak .master-cards {
-        --left: 64px;
-    }
-    .durak .stock .trump-stamp {
-        left: 10px;
-    }
-    .durak .round-message {
-        --left: 0;
-    }
-    .durak.playback .playback-replay {
-        font-size: 5rem;
-    }
-    .durak.playback .playback-text {
-        font-size: 4rem;
-        top: calc(var(--center-top) + 2.5rem);
-    }
+  .durak .opponents .player-avatar {
+    transform: scale(0.8);
+    transform-origin: top left;
+  }
+  .durak .opponents .player-stats {
+    left: 46px;
+    transform: scale(0.8);
+    transform-origin: top left;
+  }
+  .durak .opponents .player-message {
+    left: 0;
+    top: 76px;
+    transform: scale(0.9);
+    transform-origin: top left;
+  }
+  .durak .opponents .player-status,
+  .durak .opponents .player-end {
+    left: 10px;
+    transform: scale(0.8);
+    transform-origin: top left;
+  }
+  .durak .master {
+    transform: scale(0.8);
+    transform-origin: top left;
+  }
+  .durak .master .player-name {
+    top: 155px;
+  }
+  .durak .master .player-stats {
+    top: 100px;
+  }
+  .durak .master-cards {
+    --left: 64px;
+  }
+  .durak .stock .trump-stamp {
+    left: 10px;
+  }
+  .durak .round-message {
+    --left: 0;
+  }
+  .durak.playback .playback-replay {
+    font-size: 5rem;
+  }
+  .durak.playback .playback-text {
+    font-size: 4rem;
+    top: calc(var(--center-top) + 2.5rem);
+  }
 }
 @media (max-width: 350px) {
 
-    .durak .opponents .player-avatar {
-        transform: scale(0.7);
-    }
-    .durak .opponents .player-stats {
-        left: 38px;
-    }
-    .durak .opponents .player-status,
-    .durak .opponents .player-end {
-        left: 6px;
-        top: 44px;
-    }
-    .durak .opponents .player-message {
-        top: 74px;
-        transform: scale(0.8);
-    }
-    .durak .stock .trump-stamp {
-        left: 0;
-    }
-    .durak.playback .playback-text {
-        font-size: 3.3rem;
-        top: calc(var(--center-top) + 3.5rem);
-    }
+  .durak .opponents .player-avatar {
+    transform: scale(0.7);
+  }
+  .durak .opponents .player-stats {
+    left: 38px;
+  }
+  .durak .opponents .player-status,
+  .durak .opponents .player-end {
+    left: 6px;
+    top: 44px;
+  }
+  .durak .opponents .player-message {
+    top: 74px;
+    transform: scale(0.8);
+  }
+  .durak .stock .trump-stamp {
+    left: 0;
+  }
+  .durak.playback .playback-text {
+    font-size: 3.3rem;
+    top: calc(var(--center-top) + 3.5rem);
+  }
 }
