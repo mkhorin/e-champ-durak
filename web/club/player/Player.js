@@ -147,10 +147,12 @@ Club.DurakPlayer = class DurakPlayer {
     }
 
     incrementStatCounter ($stat) {
-        $stat.html(parseInt($stat.html()) + 1);
+        const counter = parseInt($stat.html()) + 1;
+        $stat.html(counter);
     }
 
     getStatusOffset () {
-        return this.play.getOffset(this.$container.find('.player-status').first());
+        const $status = this.$container.find('.player-status').first();
+        return this.play.getOffset($status);
     }
 };

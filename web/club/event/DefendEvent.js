@@ -62,6 +62,7 @@ Club.DurakDefendEvent = class DurakDefendEvent extends Club.DurakEvent {
     }
 
     openCard (card, index) {
-        card.open(this.items[index][1].rank, this.items[index][1].suit);
+        const {rank, suit} = this.items[index][1];
+        card.open(rank, suit);
     }
 };

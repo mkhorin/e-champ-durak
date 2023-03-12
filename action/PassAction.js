@@ -29,8 +29,12 @@ module.exports = class PassAction extends Base {
     execute () {
         const play = this.play;
         play.addEvent('pass', [this.hand.pos]);
-        if (this.hand === play.defender && play.changedDefendingCards && !play.options.stopAttackOnPickingUp) {
-            play.updateTurnedHands();
+        if (this.hand === play.defender) {
+            if (play.changedDefendingCards) {
+                if (!play.options.stopAttackOnPickingUp) {
+                    play.updateTurnedHands();
+                }
+            }
         }
         this.hand.turned = true;
         play.endTurn();

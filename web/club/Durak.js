@@ -117,7 +117,8 @@ Club.Durak = class Durak extends Club.CardPlay {
         }
         const counter = this.countRoundPlayers();
         for (let i = 0; i < counter; ++i) {
-            const player = this.getPlayer((this.attacker.pos + i) % counter);
+            const pos = (this.attacker.pos + i) % counter;
+            const player = this.getPlayer(pos);
             if (this.isReadyToAttack(player)) {
                 return player;
             }
@@ -130,8 +131,10 @@ Club.Durak = class Durak extends Club.CardPlay {
         this.playerMap = {};
         const $opponents = this.find('.opponents');
         for (let num = 1; num < Club.Durak.MAX_PLAYERS; ++num) {
-            $opponents.append(this.resolveTemplate('opponent', {num}));
-            this.players.push(new Club.DurakOpponent(num, this));
+            const content = this.resolveTemplate('opponent', {num});
+            $opponents.append(content);
+            const player = new Club.DurakOpponent(num, this);
+            this.players.push(player);
         }
         Jam.t($opponents);
     }
@@ -175,9 +178,11 @@ Club.Durak = class Durak extends Club.CardPlay {
     getTransferTarget () {
         const counter = this.countRoundPlayers();
         for (let i = 1; i < counter; ++i) {
-            const player = this.getPlayer((this.defender.pos + i) % counter);
-            if (player.cards.count() > 0) {
-                return player.cards.count() > this.table.countAttacks() ? player : null;
+            const pos = (this.defender.pos + i) % counter;
+            const player = this.getPlayer(pos);
+            const numCards = player.cards.count();
+            if (numCards) {
+                return numCards > this.table.countAttacks() ? player : null;
             }
         }
     }
@@ -199,7 +204,9 @@ Club.Durak = class Durak extends Club.CardPlay {
     }
 
     isReadyToAttack (player) {
-        return !player.turned && player !== this.defender && player.cards.count();
+        return !player.turned
+            && player !== this.defender
+            && player.cards.count();
     }
 
     isTrump (card) {

@@ -37,9 +37,7 @@ Club.DurakStock = class DurakStock {
         const pile = this.play.getElementRect('.stock-pile');
         this.cards.setOffset(rect.x + pile.x, rect.y + pile.y, pile.w);
         this.cards.arrange();
-        if (this.trumpCard) {
-            this.trumpCard.setOffset(rect.x, rect.y);
-        }
+        this.trumpCard?.setOffset(rect.x, rect.y);
     }
 
     splice (amount) {

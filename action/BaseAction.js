@@ -13,7 +13,9 @@ module.exports = class BaseAction extends Base {
     }
 
     validateBase () {
-        return this.validatePlayer() && this.validateActiveRound() && this.validateTurned();
+        return this.validatePlayer()
+            && this.validateActiveRound()
+            && this.validateTurned();
     }
 
     validateActiveRound () {

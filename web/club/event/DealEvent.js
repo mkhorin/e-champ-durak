@@ -56,9 +56,9 @@ Club.DurakDealEvent = class DurakDealEvent extends Club.DurakEvent {
     }
 
     afterCardMove ([card, data, player]) {
-        data ? this.openCard(card, data)
-             : this.closeCard(card);
-        player.cards.setCardOrder(card, player.getRightSidePlayerLastCard());
+        data ? this.openCard(card, data) : this.closeCard(card);
+        const last = player.getRightSidePlayerLastCard();
+        player.cards.setCardOrder(card, last);
     }
 
     processHidden () {

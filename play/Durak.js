@@ -87,7 +87,8 @@ module.exports = class Durak extends Base {
 
     resolveRoundAttacker () {
         if (!this.roundLoser) {
-            return (this.trump && this.getHandWithLowestTrump()) || this.getHandWithLowestCard();
+            return (this.trump && this.getHandWithLowestTrump())
+                || this.getHandWithLowestCard();
         }
         return this.options.attackLoser
             ? this.getRightSideHand(this.roundLoser)
@@ -179,12 +180,14 @@ module.exports = class Durak extends Base {
     }
 
     getHandByPos (pos) {
-        return this.hands[(pos + this.hands.length) % this.hands.length];
+        const index = (pos + this.hands.length) % this.hands.length;
+        return this.hands[index];
     }
 
     dealCards () {
         const deals = [];
-        for (const hand of this.sortHandsToDeal()) {
+        const hands = this.sortHandsToDeal();
+        for (const hand of hands) {
             const requires = this.countRequiredCards(hand);
             if (requires) {
                 deals.push({cards: [], requires, hand});
@@ -209,7 +212,8 @@ module.exports = class Durak extends Base {
         let max = this.options.cardsDealtAtOnce;
         let dealt = false;
         for (const deal of deals) {
-            const cards = this.stock.getDealCards(deal.requires > max ? max : deal.requires);
+            const requires = deal.requires > max ? max : deal.requires;
+            const cards = this.stock.getDealCards(requires);
             if (cards.length) {
                 deal.requires -= cards.length;
                 deal.cards.push(...cards);
@@ -275,7 +279,8 @@ module.exports = class Durak extends Base {
     }
 
     canDefendAll () {
-        for (const attacking of this.table.getOpenAttacks()) {
+        const attacks = this.table.getOpenAttacks();
+        for (const attacking of attacks) {
             if (!this.canDefend(attacking)) {
                 return false;
             }
@@ -303,9 +308,11 @@ module.exports = class Durak extends Base {
     }
 
     updateFacedCards () {
-        if (!this.allCardsFaced && this.emptyHands.length + 2 === this.hands.length && this.stock.isEmpty()) {
-            this.hands.forEach(card => card.faced = true);
-            this.allCardsFaced = true;
+        if (!this.allCardsFaced && this.stock.isEmpty()) {
+            if (this.emptyHands.length + 2 === this.hands.length) {
+                this.hands.forEach(card => card.faced = true);
+                this.allCardsFaced = true;
+            }
         }
     }
 
@@ -332,7 +339,9 @@ module.exports = class Durak extends Base {
             }
         }
         if (this.table.countAttacks()) {
-            this.table.hasOpenAttack() ? this.pickUpTable() : this.discardTable();
+            this.table.hasOpenAttack()
+                ? this.pickUpTable()
+                : this.discardTable();
         }
         this.table.clear();
         this.startTurn();
@@ -354,13 +363,15 @@ module.exports = class Durak extends Base {
     }
 
     discardTable () {
-        this.discard.add(this.table.getCards());
+        const cards = this.table.getCards();
+        this.discard.add(cards);
         this.addEvent('discard');
     }
 
     pickUpTable () {
         this.picked = true;
-        this.defender.add(this.table.getCards());
+        const cards = this.table.getCards();
+        this.defender.add(cards);
         this.updateEmptyHands(this.defender);
         this.addEvent('pickUp', [this.defender.pos]);
     }
@@ -372,16 +383,21 @@ module.exports = class Durak extends Base {
         if (!this.isAttackLimit()) {
             const attacker = this.getActiveAttacker();
             if (attacker) {
-                return attacker?.isBot() ? this.startBot(attacker) : null;
+                return attacker?.isBot()
+                    ? this.startBot(attacker)
+                    : null;
             }
         }
-        if (!this.defender.turned && this.defender.isBot() && this.table.hasOpenAttack()) {
-            this.startBot(this.defender);
+        if (!this.defender.turned && this.defender.isBot()) {
+            if (this.table.hasOpenAttack()) {
+                this.startBot(this.defender);
+            }
         }
     }
 
     startBot (hand) {
-        hand.player.createSolver(this.createSnapshot(hand));
+        const data = this.createSnapshot(hand);
+        hand.player.createSolver(data);
     }
 
     createSnapshot (hand) {
@@ -402,7 +418,8 @@ module.exports = class Durak extends Base {
     serializeHands () {
         const result = [];
         for (const hand of this.hands) {
-            result.push(hand.serializeFacedCards());
+            const data = hand.serializeFacedCards();
+            result.push(data);
         }
         return result;
     }

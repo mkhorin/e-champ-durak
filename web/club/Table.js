@@ -17,7 +17,10 @@ Club.DurakTable = class DurakTable {
     isSameRank (card) {
         const rank = card.getRank();
         for (const [attacking, defending] of this.pairs) {
-            if (attacking.getRank() === rank || (defending?.getRank() === rank)) {
+            if (attacking.getRank() === rank) {
+                return true;
+            }
+            if (defending?.getRank() === rank) {
                 return true;
             }
         }
@@ -120,7 +123,8 @@ Club.DurakTable = class DurakTable {
 
     getWeakerAttackingCards (defending) {
         const cards = [];
-        for (const attacking of this.getOpenAttackingCards()) {
+        const attacks = this.getOpenAttackingCards();
+        for (const attacking of attacks) {
             if (this.play.canBeat(attacking, defending)) {
                 cards.push(attacking);
             }
@@ -139,7 +143,8 @@ Club.DurakTable = class DurakTable {
     }
 
     getAttackingOffset (card) {
-        const [dx, dy] = this.getOffsetStep(this.countAttacks());
+        const attacks = this.countAttacks();
+        const [dx, dy] = this.getOffsetStep(attacks);
         const index = this.getAttackingIndex(card);
         return [
             this.rect.x + dx * index,
@@ -148,7 +153,8 @@ Club.DurakTable = class DurakTable {
     }
 
     getAttackingIndex (card) {
-        for (let i = 0; i < this.countAttacks(); ++i) {
+        const attacks = this.countAttacks();
+        for (let i = 0; i < attacks; ++i) {
             if (this.pairs[i][0] === card) {
                 return i;
             }
@@ -156,7 +162,8 @@ Club.DurakTable = class DurakTable {
     }
 
     getDefendingOffset (card) {
-        const [dx, dy] = this.getOffsetStep(this.countAttacks());
+        const attacks = this.countAttacks();
+        const [dx, dy] = this.getOffsetStep(attacks);
         const index = this.getDefendingIndex(card);
         return [
             this.rect.x + dx * index + this.defenseRect.x,
@@ -165,7 +172,8 @@ Club.DurakTable = class DurakTable {
     }
 
     getDefendingIndex (card) {
-        for (let i = 0; i < this.countAttacks(); ++i) {
+        const attacks = this.countAttacks();
+        for (let i = 0; i < attacks; ++i) {
             if (this.pairs[i][1] === card) {
                 return i;
             }
@@ -173,8 +181,9 @@ Club.DurakTable = class DurakTable {
     }
 
     getOffsetStep (total) {
+        const space = this.constructor.MAX_CARD_SPACE;
         const cardWidth = this.play.getCardWidth();
-        return [Club.getOffsetStep(this.rect.w, cardWidth, total, this.constructor.MAX_CARD_SPACE), 0];
+        return [Club.getOffsetStep(this.rect.w, cardWidth, total, space), 0];
     }
 
     arrange (addition = 0) {

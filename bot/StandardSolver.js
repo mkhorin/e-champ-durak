@@ -45,9 +45,11 @@ module.exports = class Standard extends Base {
 
     canTransfer () {
         const openAttacks = this.countOpenAttacks();
-        if (this.options.transferable && openAttacks && openAttacks === this.table.length) {
-            this.transferTarget = this.getTransferTarget();
-            return Number.isInteger(this.transferTarget);
+        if (this.options.transferable && openAttacks) {
+            if (openAttacks === this.table.length) {
+                this.transferTarget = this.getTransferTarget();
+                return Number.isInteger(this.transferTarget);
+            }
         }
     }
 
@@ -90,7 +92,9 @@ module.exports = class Standard extends Base {
 
     getCardToDefend (attacking, cards) {
         cards = this.getCardsToDefend(attacking, cards);
-        return cards.length ? this.filterLowestCards(cards)[0] : null;
+        return cards.length
+            ? this.filterLowestCards(cards)[0]
+            : null;
     }
 
     getCardsToDefend (attacking, cards) {
@@ -136,7 +140,9 @@ module.exports = class Standard extends Base {
     }
 
     isLonelyAttack () {
-        return this.stock === 0 && this.cards.length > 1 && this.isOtherHandsEmpty();
+        return this.stock === 0
+            && this.cards.length > 1
+            && this.isOtherHandsEmpty();
     }
 
     getCardsToLonelyAttack (cards) {
@@ -154,7 +160,8 @@ module.exports = class Standard extends Base {
     }
 
     canDefend (attacking) {
-        for (const defending of this.hands[this.defender][1]) {
+        const hands = this.hands[this.defender][1];
+        for (const defending of hands) {
             if (this.canBeat(attacking, defending)) {
                 return true;
             }
@@ -177,8 +184,10 @@ module.exports = class Standard extends Base {
     isOtherHandsEmpty () {
         if (this.hands.length > 2) {
             for (let i = 0; i < this.hands.length; ++i) {
-                if (this.attacker !== i && this.defender !== i && this.hands[i][0] > 0) {
-                    return false;
+                if (this.attacker !== i && this.defender !== i) {
+                    if (this.hands[i][0] > 0) {
+                        return false;
+                    }
                 }
             }
         }
@@ -219,7 +228,10 @@ module.exports = class Standard extends Base {
     isRankOnTable (rank) {
         const siege = this.options.siege;
         for (const [attacking, defending] of this.table) {
-            if (attacking.rank === rank || (siege && defending?.rank === rank)) {
+            if (attacking.rank === rank) {
+                return true;
+            }
+            if (siege && defending?.rank === rank) {
                 return true;
             }
         }
@@ -266,6 +278,12 @@ module.exports = class Standard extends Base {
         if (a.suit === b.suit) {
             return a.rank - b.rank;
         }
-        return this.isTrump(a) ? 1 : this.isTrump(b) ? -1 : a.rank - b.rank;
+        if (this.isTrump(a)) {
+            return 1;
+        }
+        if (this.isTrump(b)) {
+            return -1;
+        }
+        return a.rank - b.rank;
     }
 };

@@ -25,7 +25,8 @@ Club.DurakOpponent = class DurakOpponent extends Club.DurakPlayer {
     arrange () {
         const rect = Club.getElementRect(this.$container);
         const list = Club.getElementRect(this.$cards);
-        this.cards.setCardOrder(this.cards.get(0), this.getRightSidePlayerLastCard());
+        const last = this.getRightSidePlayerLastCard();
+        this.cards.setCardOrder(this.cards.get(0), last);
         this.cards.setOffset(rect.x + list.x, rect.y + list.y, list.w);
         this.cards.arrange();
     }
