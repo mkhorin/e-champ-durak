@@ -226,7 +226,7 @@ module.exports = class Standard extends Base {
     }
 
     isRankOnTable (rank) {
-        const siege = this.options.siege;
+        const {siege} = this.options;
         for (const [attacking, defending] of this.table) {
             if (attacking.rank === rank) {
                 return true;

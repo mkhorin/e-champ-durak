@@ -11,7 +11,7 @@ module.exports = class TransferAction extends Base {
         if (!this.validateBase()) {
             return false;
         }
-        const play = this.play;
+        const {play} = this;
         if (!play.options.transferable) {
             return this.setError('No transferable option');
         }
@@ -50,7 +50,7 @@ module.exports = class TransferAction extends Base {
     }
 
     execute () {
-        const play = this.play;
+        const {play} = this;
         const data = [];
         for (const card of this.cards) {
             this.hand.remove(card);

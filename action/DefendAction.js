@@ -11,7 +11,7 @@ module.exports = class DefendAction extends Base {
         if (!this.validateBase()) {
             return false;
         }
-        const play = this.play;
+        const {play} = this;
         const items = play.deck.parsePairs(this.data.pairs);
         if (!items || !items.length) {
             return this.setError('Invalid pairs');
@@ -51,7 +51,7 @@ module.exports = class DefendAction extends Base {
             data.push([attacking.data, defending.data]);
             defending.faced = true;
         }
-        const play = this.play;
+        const {play} = this;
         play.changedDefendingCards = true;
         play.updateEmptyHands(this.hand);
         play.updateFacedCards();

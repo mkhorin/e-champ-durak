@@ -32,17 +32,17 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
         if (this.turned || this.isEmpty()) {
             return false;
         }
-        const table = this.play.table;
+        const {play} = this;
         if (this.isDefender()) {
-            return table.hasOpenAttack() && !this.play.getActiveAttacker();
+            return play.table.hasOpenAttack() && !play.getActiveAttacker();
         }
-        if (table.isEmpty()) {
+        if (play.table.isEmpty()) {
             return this.isAttacker();
         }
-        if (this.play.isAttackLimit()) {
+        if (play.isAttackLimit()) {
             return false;
         }
-        return this.play.getActiveAttacker() === this;
+        return play.getActiveAttacker() === this;
     }
 
     activate () {
@@ -101,8 +101,8 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
     }
 
     move (target, reselection) {
-        const card = this.selection;
-        if (!card) {
+        const {selection} = this;
+        if (!selection) {
             return false;
         }
         if (!this.isDefender()) {
@@ -111,8 +111,8 @@ Club.DurakMaster = class DurakMaster extends Club.DurakPlayer {
         if (target) {
             return this.defend(target);
         }
-        const cards = this.play.table.getWeakerAttackingCards(card);
-        if (this.play.canTransfer(card)) {
+        const cards = this.play.table.getWeakerAttackingCards(selection);
+        if (this.play.canTransfer(selection)) {
             return !cards.length || reselection ? this.transfer() : null;
         }
         if (cards.length === 1) {

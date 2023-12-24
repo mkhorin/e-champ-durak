@@ -4,11 +4,11 @@
 Club.DurakEndEvent = class DurakEndEvent extends Club.DurakEvent {
 
     process () {
-        const play = this.play;
+        const {play} = this;
         if (play.master !== play.winner) {
             play.master.setFinisher();
         }
-        const data = this.data;
+        const {data} = this;
         const winner = this.getPlayer(data.winner);
         const loser = this.getPlayer(data.loser);
         const draw1 = this.getPlayer(data.draw1);

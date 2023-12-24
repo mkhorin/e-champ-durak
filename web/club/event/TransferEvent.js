@@ -57,7 +57,7 @@ Club.DurakTransferEvent = class DurakTransferEvent extends Club.DurakEvent {
     }
 
     executeTurn () {
-        const play = this.play;
+        const {play} = this;
         play.setAttacker(this.from);
         play.setDefender(this.target);
         play.isAttackLimit()

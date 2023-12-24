@@ -11,7 +11,7 @@ module.exports = class PassAction extends Base {
         if (!this.validateBase()) {
             return false;
         }
-        const play = this.play;
+        const {play} = this;
         if (this.hand === play.defender) {
             if (play.getActiveAttacker()) {
                 return this.setError('Attack is not over yet');
@@ -27,7 +27,7 @@ module.exports = class PassAction extends Base {
     }
 
     execute () {
-        const play = this.play;
+        const {play} = this;
         play.addEvent('pass', [this.hand.pos]);
         if (this.hand === play.defender) {
             if (play.changedDefendingCards) {
